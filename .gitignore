@@ -1,0 +1,16 @@
+# Kotlin/Java
+*.class
+*.jar
+*.war
+*.ear
+
+# IntelliJ
+.idea
+*.iml
+
+# Android
+.gradle/
+local.properties
+.DS_Store
+app/build/
+/build/
