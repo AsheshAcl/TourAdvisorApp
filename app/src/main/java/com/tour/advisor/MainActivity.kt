@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.tour.advisor.navigation.AppNavigation
-import com.tour.advisor.ui.theme.TourAdvisorAppTheme
+import com.tour.advisor.presentation.ui.theme.TourAdvisorAppTheme
 
 class MainActivity : ComponentActivity() {
 

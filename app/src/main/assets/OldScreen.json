@@ -1,0 +1,210 @@
+[
+  {
+    "screen_name": "Splash_screen",
+    "screen_title": "",
+    "statusBarRequired": false,
+    "route": "splash",
+    "ui_components": [
+      {
+        "id": "splash_icon",
+        "componentType": "icon",
+        "type": "icon",
+        "resource": "ic_app_icon"
+      },
+      {
+        "id": "splash_title",
+        "componentType": "text",
+        "type": "text",
+        "value": "Tour advisor",
+        "style": "titleLarge"
+      },
+      {
+        "id": "splash_loader",
+        "componentType": "loading_indicator",
+        "type": "loading_indicator"
+      }
+    ],
+    "auto_navigate_after": 3000
+  },
+  {
+    "screen_name": "Onboarding_screen",
+    "screen_title": "",
+    "statusBarRequired": false,
+    "route": "onboarding",
+    "ui_components": [
+      {
+        "id": "onboarding_title",
+        "componentType": "text",
+        "type": "text",
+        "value": "Welcome to Tour Advisor!",
+        "style": "titleLarge"
+      },
+      {
+        "id": "onboarding_description",
+        "componentType": "text",
+        "type": "text",
+        "value": "Plan your vacation smartly with our guided suggestions based on season and weather.",
+        "style": "bodyMedium"
+      },
+      {
+        "id": "onboarding_slider",
+        "componentType": "image_slider",
+        "type": "image_slider",
+        "resources": [
+          "ic_onboard1",
+          "ic_onboard2",
+          "ic_onboard3"
+        ]
+      },
+      {
+        "id": "onboarding_button",
+        "componentType": "button",
+        "type": "button",
+        "text": "Get Started",
+        "style": "large",
+        "on_click_route": "home"
+      }
+    ]
+  },
+  {
+    "screen_name": "Home_screen",
+    "screen_title": "Explore",
+    "statusBarRequired": true,
+    "route": "home",
+    "ui_components": [
+      {
+        "id": "home_title",
+        "componentType": "text",
+        "type": "text",
+        "value": "Explore",
+        "style": "headlineLarge"
+      },
+      {
+        "id": "home_subtitle",
+        "componentType": "text",
+        "type": "text",
+        "value": "Find best and our recommended places",
+        "style": "bodyMedium"
+      },
+      {
+        "id": "nearby_places_list",
+        "componentType": "horizontal_scroll_list",
+        "type": "horizontal_scroll_list",
+        "section_header": "Around you",
+        "section_header_style": "bodySmall",
+        "data_source": "nearby_places",
+        "item_ui": {
+          "type": "card_horizontal",
+          "fields": [
+            {
+              "id": "card_details_name",
+              "type": "text",
+              "value": "Name",
+              "style": "bodyMedium"
+            },
+            {
+              "id": "card_details_cost",
+              "type": "text",
+              "value": "Cost per person",
+              "style": "bodyMedium"
+            },
+            {
+              "id": "card_details_rating",
+              "type": "rating_single",
+              "resource": "ic_rating_single"
+            }
+          ],
+          "on_click_route": "placeDetail"
+        }
+      },
+      {
+        "id": "recommended_places_list",
+        "componentType": "vertical_scroll_list",
+        "type": "vertical_scroll_list",
+        "section_header": "You might like",
+        "section_header_style": "bodySmall",
+        "data_source": "recommended_places",
+        "item_ui": {
+          "type": "card_vertical",
+          "fields": [
+            {
+              "id": "card_details_name",
+              "type": "text",
+              "style": "bodyMedium"
+            },
+            {
+              "id": "card_details_cost",
+              "type": "text",
+              "style": "bodyMedium"
+            },
+            {
+              "id": "card_details_rating",
+              "type": "rating_single",
+              "resource": "ic_rating_single"
+            }
+          ],
+          "on_click_route": "placeDetail/{placeId}"
+        }
+      }
+    ]
+  },
+  {
+    "screen_name": "Place_detail_screen",
+    "screen_title": "Place details",
+    "statusBarRequired": true,
+    "route": "placeDetail/{placeId}",
+    "ui_components": [
+      {
+        "id": "place_title",
+        "componentType": "text",
+        "type": "text",
+        "style": "headlineLarge"
+      },
+      {
+        "id": "place_images_slider",
+        "componentType": "image_slider",
+        "type": "image_slider",
+        "resources": [
+          "ic_place_1",
+          "ic_place_2",
+          "ic_place_3"
+        ]
+      },
+      {
+        "id": "place_description",
+        "componentType": "text",
+        "type": "text",
+        "style": "bodyMedium"
+      },
+      {
+        "id": "place_info_row",
+        "componentType": "info_row",
+        "type": "info_row",
+        "items": [
+          {
+            "id": "card_details_name",
+            "type": "text",
+            "style": "bodyMedium"
+          },
+          {
+            "id": "card_details_cost",
+            "type": "text",
+            "style": "bodyMedium"
+          },
+          {
+            "id": "card_details_rating",
+            "type": "rating",
+            "resource": "$ic_rating"
+          }
+        ]
+      },
+      {
+        "id": "place_save_button",
+        "componentType": "image",
+        "type": "image",
+        "style": "small",
+        "on_click_action": "save_place"
+      }
+    ]
+  }
+]

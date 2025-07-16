@@ -1,4 +1,4 @@
-package com.tour.advisor.dynamicUI.components
+package com.tour.advisor.presentation.dynamicUI.components
 
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.*
@@ -9,6 +9,8 @@ val componentModule = SerializersModule {
         subclass(SplashComponent::class, SplashComponent.serializer())
         subclass(OnboardingComponent::class, OnboardingComponent.serializer())
         subclass(TextComponent::class, TextComponent.serializer())
+        subclass(LongCardImageComponent::class, LongCardImageComponent.serializer())
+        subclass(SmallCardImageComponent::class, SmallCardImageComponent.serializer())
         subclass(ApiTextComponent::class, ApiTextComponent.serializer())
         subclass(IconComponent::class, IconComponent.serializer())
         subclass(ButtonComponent::class, ButtonComponent.serializer())

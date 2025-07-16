@@ -1,4 +1,4 @@
-package com.tour.advisor.ui.main
+package com.tour.advisor.presentation.ui.main
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -8,7 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.tour.advisor.ui.main.constants.Screen
+import com.tour.advisor.presentation.ui.main.constants.Screen
 import com.tour.advisor.uicomponents.CommonScreenRender
 import kotlinx.coroutines.delay
 

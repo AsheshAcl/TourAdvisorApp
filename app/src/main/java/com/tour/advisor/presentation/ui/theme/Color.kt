@@ -1,4 +1,4 @@
-package com.tour.advisor.ui.theme
+package com.tour.advisor.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

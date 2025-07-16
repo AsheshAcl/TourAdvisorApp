@@ -1,8 +1,8 @@
-package com.tour.advisor.dynamicUI
+package com.tour.advisor.presentation.dynamicUI
 
 import android.content.Context
-import com.tour.advisor.dynamicUI.components.ScreenConfig
-import com.tour.advisor.dynamicUI.components.componentModule
+import com.tour.advisor.presentation.dynamicUI.components.ScreenConfig
+import com.tour.advisor.presentation.dynamicUI.components.componentModule
 import com.tour.advisor.logger.LoggerService
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

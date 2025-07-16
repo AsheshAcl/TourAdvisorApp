@@ -1,6 +1,6 @@
-package com.tour.advisor.dynamicUI.components
+package com.tour.advisor.presentation.dynamicUI.components
 
-import com.tour.advisor.ui.main.constants.Screen
+import com.tour.advisor.presentation.ui.main.constants.Screen
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -43,6 +43,22 @@ data class OnboardingComponent(
     override val id: String,
     override val type: String,
     val fields: List<UIComponent> = emptyList()
+) : UIComponent()
+
+@Serializable
+@SerialName("longCardImage")
+data class LongCardImageComponent(
+    override val id: String,
+    override val type: String,
+    val resource: String? = null
+) : UIComponent()
+
+@Serializable
+@SerialName("smallCardImage")
+data class SmallCardImageComponent(
+    override val id: String,
+    override val type: String,
+    val resource: String? = null
 ) : UIComponent()
 
 @Serializable

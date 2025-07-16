@@ -1,4 +1,4 @@
-package com.tour.advisor.ui.main.constants
+package com.tour.advisor.presentation.ui.main.constants
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

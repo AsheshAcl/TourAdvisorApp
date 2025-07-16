@@ -10,9 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.tour.advisor.dynamicUI.components.IconComponent
-import com.tour.advisor.dynamicUI.components.SplashComponent
-import com.tour.advisor.dynamicUI.components.TextComponent
+import com.tour.advisor.presentation.dynamicUI.components.IconComponent
+import com.tour.advisor.presentation.dynamicUI.components.SplashComponent
+import com.tour.advisor.presentation.dynamicUI.components.TextComponent
 
 @Composable
 fun SplashComponent(component: SplashComponent) {
@@ -31,7 +31,7 @@ fun SplashComponent(component: SplashComponent) {
                         .width(200.dp),
                     field
                 )
-                is TextComponent -> TextComponent(field)
+                is TextComponent -> TextComponent(Modifier, field)
                 else -> {
                 }
 //                is LoadingIndicatorComponent -> RenderLoadingIndicator(field)

@@ -1,9 +1,7 @@
-package com.tour.advisor.ui.main
+package com.tour.advisor.presentation.ui.main
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -14,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.tour.advisor.logger.LoggerService
-import com.tour.advisor.ui.main.constants.Screen
+import com.tour.advisor.presentation.ui.main.constants.Screen
 import com.tour.advisor.uicomponents.CommonScreenRender
 import org.koin.compose.koinInject
 

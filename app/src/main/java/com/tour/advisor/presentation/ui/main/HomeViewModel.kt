@@ -1,10 +1,10 @@
-package com.tour.advisor.ui.main
+package com.tour.advisor.presentation.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.tour.advisor.dynamicUI.ComponentParser
-import com.tour.advisor.dynamicUI.components.ScreenConfig
+import com.tour.advisor.presentation.dynamicUI.ComponentParser
+import com.tour.advisor.presentation.dynamicUI.components.ScreenConfig
 import com.tour.advisor.logger.LoggerService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
