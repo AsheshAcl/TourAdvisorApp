@@ -1,4 +1,4 @@
-package com.tour.advisor.data.screen.parser.model
+package com.tour.advisor.data.screen.model
 
 import com.tour.advisor.presentation.ui.main.constants.Screen
 import kotlinx.serialization.SerialName

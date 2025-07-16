@@ -3,8 +3,11 @@ package com.tour.advisor.di
 import androidx.room.Room
 import com.tour.advisor.data.db.AppDatabase
 import com.tour.advisor.data.screen.ScreenRepositoryImpl
-import com.tour.advisor.data.screen.parser.ComponentParser
-import com.tour.advisor.data.screen.parser.ComponentRemoteDataSource
+import com.tour.advisor.data.parser.ScreenParser
+import com.tour.advisor.data.screen.ScreenRemoteDataSource
+import com.tour.advisor.data.parser.DataParser
+import com.tour.advisor.data.parser.JsonAssetParser
+import com.tour.advisor.data.places.DataRemoteDataSource
 import com.tour.advisor.domain.screen.ScreenRepository
 import org.koin.dsl.module
 
@@ -13,6 +16,8 @@ val dataModule = module {
         Room.databaseBuilder(get(), AppDatabase::class.java, "screen-db").build()
     }
     single { get<AppDatabase>().screenDao() }
-    single<ComponentRemoteDataSource> { ComponentParser(get(), get()) }
+    single { JsonAssetParser(get(), get(), get()) }
+    single<ScreenRemoteDataSource> { ScreenParser(get(), get()) }
+    single<DataRemoteDataSource> { DataParser(get(), get()) }
     single<ScreenRepository> { ScreenRepositoryImpl(get(), get(), get()) }
 }

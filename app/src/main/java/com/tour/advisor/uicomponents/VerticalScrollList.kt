@@ -11,9 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.tour.advisor.data.screen.parser.model.ApiTextComponent
-import com.tour.advisor.data.screen.parser.model.SmallCardImageComponent
-import com.tour.advisor.data.screen.parser.model.VerticalListComponent
+import com.tour.advisor.data.screen.model.ApiTextComponent
+import com.tour.advisor.data.screen.model.SmallCardImageComponent
+import com.tour.advisor.data.screen.model.VerticalListComponent
 import com.tour.advisor.domain.models.ComponentStateModel
 import com.tour.advisor.presentation.ui.main.HomeViewModel
 import com.tour.advisor.presentation.utility.UIUtils.Companion.getTypography

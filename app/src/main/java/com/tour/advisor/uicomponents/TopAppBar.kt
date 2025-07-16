@@ -9,7 +9,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import com.tour.advisor.data.screen.parser.model.TopAppBarComponent
+import com.tour.advisor.data.screen.model.TopAppBarComponent
 import com.tour.advisor.domain.models.ComponentStateModel
 
 @OptIn(ExperimentalMaterial3Api::class)

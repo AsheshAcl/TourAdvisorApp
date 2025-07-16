@@ -1,6 +1,6 @@
 package com.tour.advisor.domain.screen
 
-import com.tour.advisor.data.screen.parser.model.ScreenConfig
+import com.tour.advisor.data.screen.model.ScreenConfig
 
 interface ScreenRepository {
     suspend fun getScreens(): List<ScreenConfig>

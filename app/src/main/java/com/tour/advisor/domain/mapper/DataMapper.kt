@@ -1,16 +1,16 @@
 package com.tour.advisor.domain.mapper
 
-import com.tour.advisor.data.screen.parser.model.ApiTextComponent
-import com.tour.advisor.data.screen.parser.model.HorizontalListComponent
-import com.tour.advisor.data.screen.parser.model.ImageComponent
-import com.tour.advisor.data.screen.parser.model.LongCardImageComponent
-import com.tour.advisor.data.screen.parser.model.ScreenConfig
-import com.tour.advisor.data.screen.parser.model.SmallCardImageComponent
-import com.tour.advisor.data.screen.parser.model.SplashComponent
-import com.tour.advisor.data.screen.parser.model.TextComponent
-import com.tour.advisor.data.screen.parser.model.TopAppBarComponent
-import com.tour.advisor.data.screen.parser.model.UIComponent
-import com.tour.advisor.data.screen.parser.model.VerticalListComponent
+import com.tour.advisor.data.screen.model.ApiTextComponent
+import com.tour.advisor.data.screen.model.HorizontalListComponent
+import com.tour.advisor.data.screen.model.ImageComponent
+import com.tour.advisor.data.screen.model.LongCardImageComponent
+import com.tour.advisor.data.screen.model.ScreenConfig
+import com.tour.advisor.data.screen.model.SmallCardImageComponent
+import com.tour.advisor.data.screen.model.SplashComponent
+import com.tour.advisor.data.screen.model.TextComponent
+import com.tour.advisor.data.screen.model.TopAppBarComponent
+import com.tour.advisor.data.screen.model.UIComponent
+import com.tour.advisor.data.screen.model.VerticalListComponent
 import com.tour.advisor.domain.models.ComponentStateModel
 import com.tour.advisor.domain.models.ScreenModels
 import com.tour.advisor.presentation.ui.main.constants.Screen

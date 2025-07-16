@@ -4,7 +4,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.tour.advisor.data.screen.parser.model.TextComponent
+import com.tour.advisor.data.screen.model.TextComponent
 import com.tour.advisor.domain.models.ComponentStateModel
 import com.tour.advisor.presentation.utility.UIUtils.Companion.getTypography
 

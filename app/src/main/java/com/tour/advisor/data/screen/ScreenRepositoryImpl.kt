@@ -1,12 +1,11 @@
 package com.tour.advisor.data.screen
 
-import com.tour.advisor.data.screen.parser.ComponentRemoteDataSource
 import com.tour.advisor.domain.screen.ScreenRepository
 import com.tour.advisor.logger.LoggerService
-import com.tour.advisor.data.screen.parser.model.ScreenConfig
+import com.tour.advisor.data.screen.model.ScreenConfig
 import kotlinx.serialization.json.Json
 
-class ScreenRepositoryImpl(private val remoteSource: ComponentRemoteDataSource,
+class ScreenRepositoryImpl(private val remoteSource: ScreenRemoteDataSource,
                            private val dao: ScreenDao,
                            private val logger: LoggerService
 ): ScreenRepository {

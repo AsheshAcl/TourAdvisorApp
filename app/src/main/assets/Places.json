@@ -1,0 +1,72 @@
+[
+  {
+    "place_name": "Eiffel Tower",
+    "place_image": "https://www.example.com/image933.jpg",
+    "place_description": "Eiffel Tower - Iconic iron lattice tower in Paris",
+    "place_cost": "Eiffel Tower - $20",
+    "place_rating": 2.3
+  },
+  {
+    "place_name": "Great Wall of China",
+    "place_image": "https://www.example.com/image6.jpg",
+    "place_description": "France",
+    "place_cost": "Machu Picchu - $50",
+    "place_rating": 0.4
+  },
+  {
+    "place_name": "Machu Picchu",
+    "place_image": "https://www.example.com/image81.jpg",
+    "place_description": "Machu Picchu - Ancient Incan citadel in Peru",
+    "place_cost": "Great Wall of China - $30",
+    "place_rating": 3.5
+  },
+  {
+    "place_name": "Taj Mahal",
+    "place_image": "https://www.example.com/image927.jpg",
+    "place_description": "Great Wall of China - Series of fortifications in China",
+    "place_cost": "Taj Mahal - $40",
+    "place_rating": 3.7
+  },
+  {
+    "place_name": "Pyramids of Giza",
+    "place_image": "https://www.example.com/image8.jpg",
+    "place_description": "Santorini - Greek island known for its white buildings and blue domes",
+    "place_cost": "Pyramids of Giza - $25",
+    "place_rating": 3
+  },
+  {
+    "place_name": "Santorini",
+    "place_image": "https://www.example.com/image869.jpg",
+    "place_description": "Taj Mahal - Marble mausoleum in Agra",
+    "place_cost": "Statue of Liberty - $35",
+    "place_rating": 4.1
+  },
+  {
+    "place_name": "Grand Canyon",
+    "place_image": "https://www.example.com/image32.jpg",
+    "place_description": "India",
+    "place_cost": "Santorini - $60",
+    "place_rating": 0.7
+  },
+  {
+    "place_name": "Petra",
+    "place_image": "https://www.example.com/image6.jpg",
+    "place_description": "Pyramids of Giza - Ancient Egyptian pyramids",
+    "place_cost": "Colosseum - $45",
+    "place_rating": 3
+  },
+  {
+    "place_name": "Colosseum",
+    "place_image": "https://www.example.com/image3.jpg",
+    "place_description": "Venice - Italian city known for its canals",
+    "place_cost": "Petra - $55",
+    "place_rating": 1
+  },
+  {
+    "place_name": "Niagara Falls",
+    "place_image": "https://www.example.com/image35.jpg",
+    "place_description": "Petra - Ancient city in Jordan",
+    "place_cost": "Bora Bora - $70",
+    "place_rating": 1.9
+  }
+]
