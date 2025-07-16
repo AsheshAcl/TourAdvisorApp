@@ -10,12 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.tour.advisor.presentation.dynamicUI.components.IconComponent
-import com.tour.advisor.presentation.dynamicUI.components.SplashComponent
-import com.tour.advisor.presentation.dynamicUI.components.TextComponent
+import com.tour.advisor.domain.models.ComponentStateModel
 
 @Composable
-fun SplashComponent(component: SplashComponent) {
+fun SplashComponent(component: ComponentStateModel.Splash) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -23,15 +21,15 @@ fun SplashComponent(component: SplashComponent) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        component.fields.forEach { field ->
+        component.components.forEach { field ->
             when (field) {
-                is IconComponent -> IconComponent(
+                is ComponentStateModel.Image -> ImageComponent(
                     modifier = Modifier
                         .height(200.dp)
                         .width(200.dp),
                     field
                 )
-                is TextComponent -> TextComponent(Modifier, field)
+                is ComponentStateModel.Text -> TextComponent(Modifier, field)
                 else -> {
                 }
 //                is LoadingIndicatorComponent -> RenderLoadingIndicator(field)

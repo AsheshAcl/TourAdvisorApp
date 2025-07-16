@@ -1,4 +1,4 @@
-package com.tour.advisor.presentation.dynamicUI.components
+package com.tour.advisor.data.screen.parser.model
 
 import com.tour.advisor.presentation.ui.main.constants.Screen
 import kotlinx.serialization.SerialName
@@ -6,11 +6,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ScreenConfig(
-    val screen_name: Screen,
+    val screen_name: String,
     val screen_title: String = "",
     val route: String,
     val ui_components: List<UIComponent>,
-    val auto_navigate_after: Long = 0,
+    val auto_navigate_after: Long = 3000,
 //    val next_route: String? = null
 )
 
@@ -46,27 +46,11 @@ data class OnboardingComponent(
 ) : UIComponent()
 
 @Serializable
-@SerialName("longCardImage")
-data class LongCardImageComponent(
-    override val id: String,
-    override val type: String,
-    val resource: String? = null
-) : UIComponent()
-
-@Serializable
-@SerialName("smallCardImage")
-data class SmallCardImageComponent(
-    override val id: String,
-    override val type: String,
-    val resource: String? = null
-) : UIComponent()
-
-@Serializable
 @SerialName("text")
 data class TextComponent(
     override val id: String,
     override val type: String,
-    val value: String? = null,
+    val value: String,
     val style: String? = null
 ) : UIComponent()
 
@@ -75,7 +59,7 @@ data class TextComponent(
 data class ApiTextComponent(
     override val id: String,
     override val type: String,
-    val value: String? = null,
+    val value: String,
     val style: String? = null
 ) : UIComponent()
 
@@ -85,6 +69,14 @@ data class IconComponent(
     override val id: String,
     override val type: String,
     val resource: String
+) : UIComponent()
+
+@Serializable
+@SerialName("image")
+data class ImageComponent(
+    override val id: String,
+    override val type: String,
+    val resource: String? = null
 ) : UIComponent()
 
 @Serializable
@@ -132,17 +124,24 @@ data class VerticalListComponent(
     val section_header: String,
     val section_header_style: String,
     val data_source: String,
-    val fields: List<UIComponent> = emptyList()
+    val fields: List<UIComponent> = emptyList(),
+    val onClickRoute: String
 ) : UIComponent()
 
 @Serializable
-@SerialName("image")
-data class ImageComponent(
+@SerialName("longCardImage")
+data class LongCardImageComponent(
     override val id: String,
     override val type: String,
-    val style: String,
-    val resource: String? = null,
-    val onClickRoute: String? = null
+    val resource: String? = null
+) : UIComponent()
+
+@Serializable
+@SerialName("smallCardImage")
+data class SmallCardImageComponent(
+    override val id: String,
+    override val type: String,
+    val resource: String? = null
 ) : UIComponent()
 
 @Serializable

@@ -9,18 +9,17 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import com.tour.advisor.presentation.dynamicUI.components.TopAppBarComponent
+import com.tour.advisor.data.screen.parser.model.TopAppBarComponent
+import com.tour.advisor.domain.models.ComponentStateModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(component: TopAppBarComponent) {
+fun TopAppBar(component: ComponentStateModel.TopBar) {
     TopAppBar(
         windowInsets = WindowInsets(0),
         title = { Text(component.title) },
         navigationIcon = {
-            IconButton(onClick = { /* handle back */ }) {
-                Icon(Icons.Default.Menu, contentDescription = "Back")
-            }
+
         },
         actions = {
             /*IconButton(onClick = { *//* handle action *//* }) {

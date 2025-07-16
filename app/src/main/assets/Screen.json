@@ -11,8 +11,8 @@
         "fields": [
           {
             "id": "splash_icon",
-            "componentType": "icon",
-            "type": "icon",
+            "componentType": "image",
+            "type": "image",
             "resource": "ic_app_icon"
           },
           {

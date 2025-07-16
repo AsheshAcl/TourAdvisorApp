@@ -9,12 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.tour.advisor.presentation.dynamicUI.components.IconComponent
+import com.tour.advisor.domain.models.ComponentStateModel
 import com.tour.advisor.presentation.utility.UIUtils.Companion.getDrawableIdFromName
 
 @Composable
-fun IconComponent(modifier: Modifier, component: IconComponent) {
-    component.resource.getDrawableIdFromName()?.let { painterResource(id = it) }?.let {
+fun ImageComponent(modifier: Modifier, component: ComponentStateModel.Image) {
+    component.url?.getDrawableIdFromName()?.let { painterResource(id = it) }?.let {
         Image(
             painter = it, contentDescription = null, modifier = modifier.size(64.dp)
         )
@@ -25,10 +25,10 @@ fun IconComponent(modifier: Modifier, component: IconComponent) {
 @Preview
 @Composable
 private fun IconComponentPreview() {
-    IconComponent(
+    ImageComponent(
         modifier = Modifier
             .width(100.dp)
             .height(100.dp),
-        IconComponent(id = "", type = "icon", resource = "ic_app_icon")
+        ComponentStateModel.Image(url = "ic_app_icon")
     )
 }

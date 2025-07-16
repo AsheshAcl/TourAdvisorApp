@@ -2,6 +2,8 @@ package com.tour.advisor
 
 import android.app.Application
 import com.tour.advisor.di.appModule
+import com.tour.advisor.di.dataModule
+import com.tour.advisor.di.domainModule
 import com.tour.advisor.di.loggerModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.component.KoinComponent
@@ -14,7 +16,7 @@ class TourAdvisorApp: KoinComponent, Application() {
         koinApplication {
             startKoin {
                 androidContext(this@TourAdvisorApp)
-                modules(appModule, loggerModule)
+                modules(appModule, loggerModule, dataModule, domainModule)
             }
         }
     }
