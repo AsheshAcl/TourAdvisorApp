@@ -11,58 +11,71 @@ data class ScreenModels(
 
 sealed class ComponentStateModel {
     val id: String = ""
+    abstract val dataSource: String?
 
     data class Splash(
+        override val dataSource: String? = null,
         val components: List<ComponentStateModel>
     ) : ComponentStateModel()
 
     data class TopBar(
+        override val dataSource: String? = null,
         val title: String
     ) : ComponentStateModel()
 
     data class Text(
+        override val dataSource: String? = null,
         val value: String,
         val style: String?
     ) : ComponentStateModel()
 
     data class ApiText(
+        override val dataSource: String? = null,
         val value: String,
         val style: String?
     ) : ComponentStateModel()
 
     data class Button(
+        override val dataSource: String? = null,
         val text: String,
         val style: String,
         val onClickRoute: String
     ) : ComponentStateModel()
 
     data class Image(
-        val url: String?
+        override val dataSource: String? = null,
+        val url: String? = null
     ) : ComponentStateModel()
 
     data class HorizontalList(
+        override val dataSource: String? = null,
         val sectionHeader: String,
         val sectionHeaderStyle: String,
         val fields: List<ComponentStateModel>,
+        var items: List<ComponentItemModel>,
         val onClickRoute: String
     ) : ComponentStateModel()
 
     data class LongCard(
+        override val dataSource: String? = null,
         val value: String?
     ) : ComponentStateModel()
 
     data class VerticalList(
+        override val dataSource: String? = null,
         val sectionHeader: String,
         val sectionHeaderStyle: String,
         val fields: List<ComponentStateModel>,
+        var items: List<ComponentItemModel>,
         val onClickRoute: String
     ) : ComponentStateModel()
 
     data class SmallCard(
+        override val dataSource: String? = null,
         val value: String?
     ) : ComponentStateModel()
 
     data class Unknown(
-        val value: String
+        override val dataSource: String? = null
     ) : ComponentStateModel()
 }

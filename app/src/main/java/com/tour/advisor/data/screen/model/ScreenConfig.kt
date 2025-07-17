@@ -18,6 +18,8 @@ data class ScreenConfig(
 sealed class UIComponent {
     abstract val id: String
     abstract val type: String
+    @SerialName("data_source")
+    val dataSource: String? = null
 }
 
 @Serializable
@@ -27,14 +29,16 @@ data class TopAppBarComponent(
     override val type: String,
     val title: String,
     val fields: List<UIComponent> = emptyList()
-) : UIComponent()
+) : UIComponent() {
+
+}
 
 @Serializable
 @SerialName("splash")
 data class SplashComponent(
     override val id: String,
     override val type: String,
-    val fields: List<UIComponent> = emptyList()
+    val fields: List<UIComponent> = emptyList(),
 ) : UIComponent()
 
 @Serializable
@@ -111,7 +115,6 @@ data class HorizontalListComponent(
     override val type: String,
     val section_header: String,
     val section_header_style: String,
-    val data_source: String,
     val fields: List<UIComponent> = emptyList(),
     val onClickRoute: String
 ) : UIComponent()
@@ -123,7 +126,6 @@ data class VerticalListComponent(
     override val type: String,
     val section_header: String,
     val section_header_style: String,
-    val data_source: String,
     val fields: List<UIComponent> = emptyList(),
     val onClickRoute: String
 ) : UIComponent()

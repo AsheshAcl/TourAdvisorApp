@@ -18,39 +18,25 @@ import com.tour.advisor.presentation.ui.main.constants.Screen
 
 @Composable
 fun AppNavigation(
-    screensStateModels: State<List<ScreenModels>>,
+//    screensStateModels: State<List<ScreenModels>>,
     navController: NavHostController,
     homeViewModel: HomeViewModel
 ) {
     NavHost(navController = navController, startDestination = "splash") {
         composable("splash") {
-            val splashScreenConfig by remember(screensStateModels.value) {
-                mutableStateOf(screensStateModels.value.find { it.name == Screen.SPLASH_SCREEN })
-            }
-            splashScreenConfig?.let { it1 -> SplashScreen(modifier = Modifier, homeViewModel, it1) }
+            SplashScreen(modifier = Modifier, homeViewModel)
         }
 
         composable("home") {
-            val homeScreenConfig by remember(screensStateModels.value) {
-                mutableStateOf(screensStateModels.value.find { it.name == Screen.HOME_SCREEN })
-            }
-            homeScreenConfig?.let { it1 ->
-                HomeScreen(
-                    modifier = Modifier,
-                    homeViewModel = homeViewModel,
-                    it1
-                )
-            }
+            HomeScreen(
+                modifier = Modifier,
+                homeViewModel = homeViewModel
+            )
         }
 
         composable("placeDetails") {
-            val detailsScreenConfig by remember(screensStateModels.value) {
-                mutableStateOf(screensStateModels.value.find { it.name == Screen.HOME_SCREEN })
-            }
-            detailsScreenConfig?.let { it1 ->
-                PlaceDetailsScreen(homeViewModel = homeViewModel, modifier = Modifier,
-                    navController = navController)
-            }
+            PlaceDetailsScreen(homeViewModel = homeViewModel, modifier = Modifier,
+                navController = navController)
         }
     }
 }

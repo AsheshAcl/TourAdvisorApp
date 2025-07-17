@@ -103,9 +103,50 @@
         "style": "bodyLarge"
       },
       {
-        "id": "nearby_places_list",
+        "id": "country_list",
         "componentType": "horizontal_scroll_list",
         "type": "horizontal_scroll_list",
+        "section_header": "Country",
+        "section_header_style": "titleMedium",
+        "data_source": "nearby_places",
+        "fields": [
+          {
+            "id": "long_card_image",
+            "componentType": "longCardImage",
+            "type": "longCardImage",
+            "resource": "",
+            "data_source": "place_image"
+          },
+          {
+            "id": "card_details_name",
+            "componentType": "apiText",
+            "type": "text",
+            "value": "Name",
+            "style": "labelSmall",
+            "data_source": "place_name"
+          },
+          {
+            "id": "card_details_cost",
+            "componentType": "apiText",
+            "type": "text",
+            "value": "Cost per person",
+            "style": "labelMedium",
+            "data_source": "place_cost"
+          },
+          {
+            "id": "card_details_rating",
+            "componentType": "rating_single",
+            "type": "rating_single",
+            "resource": "ic_rating_single",
+            "data_source": "place_rating"
+          }
+        ],
+        "onClickRoute": "placeDetails"
+      },
+      {
+        "id": "nearby_places_list",
+        "componentType": "vertical_scroll_list",
+        "type": "vertical_scroll_list",
         "section_header": "Around you",
         "section_header_style": "titleMedium",
         "data_source": "nearby_places",
@@ -114,71 +155,80 @@
             "id": "long_card_image",
             "componentType": "longCardImage",
             "type": "longCardImage",
-            "resource": "{place_card_image}"
+            "resource": "",
+            "data_source": "place_image"
           },
           {
             "id": "card_details_name",
             "componentType": "apiText",
             "type": "text",
             "value": "Name",
-            "style": "labelSmall"
+            "style": "labelSmall",
+            "data_source": "place_name"
           },
           {
             "id": "card_details_cost",
             "componentType": "apiText",
             "type": "text",
             "value": "Cost per person",
-            "style": "labelMedium"
+            "style": "labelMedium",
+            "data_source": "place_cost"
           },
           {
             "id": "card_details_rating",
             "componentType": "rating_single",
             "type": "rating_single",
-            "resource": "ic_rating_single"
+            "resource": "ic_rating_single",
+            "data_source": "place_rating"
           }
         ],
         "onClickRoute": "placeDetails"
       },
       {
         "id": "recommended_places_list",
-        "componentType": "vertical_scroll_list",
-        "type": "vertical_scroll_list",
+        "componentType": "horizontal_scroll_list",
+        "type": "horizontal_scroll_list",
         "section_header": "You might like",
         "section_header_style": "titleMedium",
-        "data_source": "recommended_places",
+        "data_source": "nearby_places",
         "fields": [
           {
             "id": "small_card_image",
             "componentType": "smallCardImage",
             "type": "smallCardImage",
-            "resource": "{place_card_image}"
+            "resource": "{place_card_image}",
+            "data_source": "place_image"
           },
           {
             "id": "card_details_name",
             "componentType": "apiText",
             "type": "text",
             "value": "EnvyLicious Hotel & Suites",
-            "style": "titleLarge"
+            "style": "titleLarge",
+            "data_source": "place_name"
           },
           {
             "id": "card_details_location",
             "componentType": "apiText",
             "type": "text",
             "value": "Royalties Street",
-            "style": "titleSmall"
+            "style": "titleSmall",
+            "data_source": "place_location"
           },
           {
             "id": "card_details_cost",
             "componentType": "apiText",
             "type": "text",
             "value": "Cost per person",
-            "style": "titleMedium"
+            "style": "titleMedium",
+            "data_source": "place_cost"
           },
           {
             "id": "card_details_rating",
             "componentType": "rating_single",
             "type": "rating_single",
-            "resource": "ic_rating_single"
+            "resource": "ic_rating_single",
+            "data_source": "place_rating"
           }
         ],
         "onClickRoute": "placeDetails"

@@ -7,10 +7,10 @@ import java.util.UUID
 @Entity(tableName = "places")
 data class PlaceEntity(
     @PrimaryKey val id: UUID = UUID.randomUUID(),
-    val placeName: String,
-    val placeImage: String,
-    val placeDescription: String,
-    val placeCost: String,
-    val placeRating: Double,
+    val placeName: String? = null,
+    val placeImage: String? = null,
+    val placeDescription: String? = null,
+    val placeCost: String? = null,
+    val placeRating: Double? = null,
 
 )

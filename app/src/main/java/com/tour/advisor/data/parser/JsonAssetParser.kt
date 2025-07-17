@@ -23,7 +23,7 @@ class JsonAssetParser(
     inline fun <reified T> parseFromAsset(fileName: String): T? {
         return try {
             logger.logInfo("JsonAssetParser", "Reading $fileName...")
-            val jsonStr = assetLoader.loadJson("Screen.json")
+            val jsonStr = assetLoader.loadJson(fileName)
             json.decodeFromString<T>(jsonStr)
         } catch (e: Exception) {
             logger.logError("JsonAssetParser", "Error parsing $fileName: ${e.message}")

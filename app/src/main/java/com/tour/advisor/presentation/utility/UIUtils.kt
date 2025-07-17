@@ -4,6 +4,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import com.tour.advisor.R
+import com.tour.advisor.data.places.model.PlaceModel
+import com.tour.advisor.domain.models.ComponentItemModel
 
 class UIUtils {
     companion object {

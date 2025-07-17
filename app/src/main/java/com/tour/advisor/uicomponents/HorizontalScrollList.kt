@@ -6,11 +6,14 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.tour.advisor.domain.models.ComponentItemModel
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.domain.models.PlaceItemModel
 import com.tour.advisor.presentation.ui.main.HomeViewModel
 import com.tour.advisor.presentation.utility.UIUtils.Companion.getTypography
 
@@ -27,25 +30,38 @@ fun HorizontalScrollList(
         LazyRow(
             contentPadding = PaddingValues(horizontal = 8.dp)
         ) {
-            items(10) {
+            items(component.items) { componentData ->
                 Column {
                     Column(Modifier.clickable {
                         //Todo: Fix the clickable animation
                         homeViewModel.navigateToRoute(component.onClickRoute)
                     }) {
-                        component.fields.forEach { field ->
-                            when (field) {
-                                is ComponentStateModel.LongCard -> LongCardImage()
-                                is ComponentStateModel.ApiText -> ApiTextComponent(Modifier.padding(start = 10.dp), field)
-//                                is SingleRatingComponent -> RenderRatingComponent(field)
-                                else -> {
-
-                                }
-                            }
+                        if(componentData is PlaceItemModel) {
+                            LongCardImage(ComponentStateModel.Image(url = componentData.imageUrl))
+                            TextComponent(
+                                Modifier.padding(start = 10.dp), ComponentStateModel.Text(
+                                    value = componentData.title,
+                                    style = "labelSmall"
+                                )
+                            )
+                            TextComponent(
+                                Modifier.padding(start = 10.dp), ComponentStateModel.Text(
+                                    value = componentData.cost,
+                                    style = "labelMedium"
+                                )
+                            )
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+fun getValueForDataSource(dataSource: String?, componentData: ComponentItemModel) {
+    when(componentData) {
+        is PlaceItemModel -> {
+//            if(dataSource == componentData)
         }
     }
 }

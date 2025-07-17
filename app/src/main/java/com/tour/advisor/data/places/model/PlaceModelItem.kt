@@ -1,9 +1,18 @@
 package com.tour.advisor.data.places.model
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class PlaceModel(
-    val place_cost: String,
-    val place_description: String,
-    val place_image: String,
-    val place_name: String,
-    val place_rating: Double
+    @SerialName("place_name")
+    val placeName: String,
+    @SerialName("place_image")
+    val placeImage: String,
+    @SerialName("place_description")
+    val placeDescription: String,
+    @SerialName("place_cost")
+    val placeCost: String,
+    @SerialName("place_rating")
+    val placeRating: Double
 )

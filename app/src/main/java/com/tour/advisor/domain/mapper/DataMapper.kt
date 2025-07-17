@@ -28,30 +28,36 @@ class DataMapper {
             return when (this) {
                 is TopAppBarComponent -> ComponentStateModel.TopBar(title = title)
                 is SplashComponent -> ComponentStateModel.Splash(components = fields.map { it.toUiComponent() })
-                is TextComponent -> ComponentStateModel.Text(value = value, style = style)
-                is ApiTextComponent -> ComponentStateModel.ApiText(value = value, style = style)
+                is TextComponent -> ComponentStateModel.Text(value = value, style = style, dataSource = dataSource)
+                is ApiTextComponent -> ComponentStateModel.ApiText(value = value, style = style, dataSource = dataSource)
                 is ImageComponent -> ComponentStateModel.Image(
-                    url = resource
+                    url = resource, dataSource = dataSource
                 )
                 is HorizontalListComponent -> ComponentStateModel.HorizontalList(
                     sectionHeader = section_header,
                     sectionHeaderStyle = section_header_style,
                     fields = fields.map { it.toUiComponent() },
-                    onClickRoute = onClickRoute
+                    items = emptyList(),
+                    onClickRoute = onClickRoute,
+                    dataSource = dataSource
                 )
                 is VerticalListComponent -> ComponentStateModel.VerticalList(
                     sectionHeader = section_header,
                     sectionHeaderStyle = section_header_style,
                     fields = fields.map { it.toUiComponent() },
-                    onClickRoute = onClickRoute
+                    onClickRoute = onClickRoute,
+                    items = emptyList(),
+                    dataSource = dataSource
                 )
 
                 is LongCardImageComponent -> ComponentStateModel.LongCard(
-                    value = resource
+                    value = resource,
+                    dataSource = dataSource
                 )
 
                 is SmallCardImageComponent -> ComponentStateModel.SmallCard(
-                    value = resource
+                    value = resource,
+                    dataSource = dataSource
                 )
 
                 else -> ComponentStateModel.Unknown("")

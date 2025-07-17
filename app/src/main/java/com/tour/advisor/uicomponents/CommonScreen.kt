@@ -23,8 +23,8 @@ fun CommonScreenRender(modifier: Modifier = Modifier,
                 is ComponentStateModel.ApiText -> ApiTextComponent(Modifier.padding(8.dp), component)
                 is ComponentStateModel.HorizontalList -> HorizontalScrollList(component, homeViewModel = homeViewModel)
                 is ComponentStateModel.VerticalList -> VerticalScrollList(component, homeViewModel = homeViewModel)
-                is ComponentStateModel.LongCard -> LongCardImage()
-                is ComponentStateModel.SmallCard -> SmallCardImage()
+                is ComponentStateModel.LongCard -> LongCardImage(ComponentStateModel.Image())
+                is ComponentStateModel.SmallCard -> SmallCardImage(ComponentStateModel.Image())
                 else -> {
 
                 }
