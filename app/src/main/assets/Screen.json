@@ -2,7 +2,7 @@
   {
     "screen_name": "SPLASH_SCREEN",
     "screen_title": "",
-    "route": "splash",
+    "route": "SPLASH_SCREEN",
     "ui_components": [
       {
         "id": "splash",
@@ -19,6 +19,7 @@
             "id": "splash_title",
             "componentType": "text",
             "type": "text",
+            "style": "titleLarge",
             "value": "Tour advisor"
           },
           {
@@ -34,7 +35,7 @@
   {
     "screen_name": "ONBOARDING_SCREEN",
     "screen_title": "",
-    "route": "onboarding",
+    "route": "ONBOARDING_SCREEN",
     "ui_components": [
       {
         "id": "onboarding",
@@ -69,7 +70,7 @@
             "id": "onboarding_button",
             "componentType": "button",
             "type": "button",
-            "text": "Get Started",
+            "value": "Get Started",
             "style": "large",
             "onClickRoute": "home"
           }
@@ -80,11 +81,12 @@
   {
     "screen_name": "HOME_SCREEN",
     "screen_title": "Explore",
-    "route": "home",
+    "route": "HOME_SCREEN",
     "ui_components": [
       {
         "id": "top_bar",
         "componentType": "topAppBar",
+        "showBack": "false",
         "title": "Tour advisor",
         "type": "topAppBar"
       },
@@ -119,7 +121,7 @@
           },
           {
             "id": "card_details_name",
-            "componentType": "apiText",
+            "componentType": "text",
             "type": "text",
             "value": "Name",
             "style": "labelSmall",
@@ -127,7 +129,7 @@
           },
           {
             "id": "card_details_cost",
-            "componentType": "apiText",
+            "componentType": "text",
             "type": "text",
             "value": "Cost per person",
             "style": "labelMedium",
@@ -141,7 +143,7 @@
             "data_source": "place_rating"
           }
         ],
-        "onClickRoute": "placeDetails"
+        "onClickRoute": "DETAILS_SCREEN"
       },
       {
         "id": "nearby_places_list",
@@ -160,7 +162,7 @@
           },
           {
             "id": "card_details_name",
-            "componentType": "apiText",
+            "componentType": "text",
             "type": "text",
             "value": "Name",
             "style": "labelSmall",
@@ -168,7 +170,7 @@
           },
           {
             "id": "card_details_cost",
-            "componentType": "apiText",
+            "componentType": "text",
             "type": "text",
             "value": "Cost per person",
             "style": "labelMedium",
@@ -182,7 +184,7 @@
             "data_source": "place_rating"
           }
         ],
-        "onClickRoute": "placeDetails"
+        "onClickRoute": "DETAILS_SCREEN"
       },
       {
         "id": "recommended_places_list",
@@ -201,7 +203,7 @@
           },
           {
             "id": "card_details_name",
-            "componentType": "apiText",
+            "componentType": "text",
             "type": "text",
             "value": "EnvyLicious Hotel & Suites",
             "style": "titleLarge",
@@ -209,7 +211,7 @@
           },
           {
             "id": "card_details_location",
-            "componentType": "apiText",
+            "componentType": "text",
             "type": "text",
             "value": "Royalties Street",
             "style": "titleSmall",
@@ -217,7 +219,7 @@
           },
           {
             "id": "card_details_cost",
-            "componentType": "apiText",
+            "componentType": "text",
             "type": "text",
             "value": "Cost per person",
             "style": "titleMedium",
@@ -231,26 +233,28 @@
             "data_source": "place_rating"
           }
         ],
-        "onClickRoute": "placeDetails"
+        "onClickRoute": "DETAILS_SCREEN"
       }
     ]
   },
   {
     "screen_name": "PLACE_DETAIL_SCREEN",
     "screen_title": "Place details",
-    "route": "placeDetails",
+    "route": "DETAILS_SCREEN",
     "ui_components": [
       {
         "id": "top_bar",
         "componentType": "topAppBar",
-        "title": "Place details",
-        "type": "topAppBar"
+        "type": "topAppBar",
+        "showBack": "true",
+        "title": "Tour details"
       },
       {
         "id": "place_title",
         "componentType": "text",
         "type": "text",
-        "value": "{placeTitle}",
+        "value": "placeName",
+        "data_source": "place_name",
         "style": "headlineLarge"
       },
       {
@@ -264,11 +268,27 @@
         ]
       },
       {
+        "id": "place_description_label",
+        "componentType": "text",
+        "type": "text",
+        "value": "Description",
+        "style": "headlineSmall"
+      },
+      {
         "id": "place_description",
         "componentType": "text",
         "type": "text",
-        "value": "{placeDescription}",
-        "style": "bodyMedium"
+        "value": "placeDescription",
+        "data_source": "placeDescription",
+        "style": "bodyLarge"
+      },
+      {
+        "id": "place_cost",
+        "componentType": "text",
+        "type": "text",
+        "value": "placeCost",
+        "data_source": "place_cost",
+        "style": "titleSmall"
       },
       {
         "id": "place_info_row",
@@ -294,8 +314,9 @@
       },
       {
         "id": "place_save_button",
-        "componentType": "image",
-        "type": "image",
+        "componentType": "button",
+        "value": "Book Now",
+        "type": "button",
         "style": "small",
         "onClickRoute": "save_place"
       }

@@ -28,8 +28,6 @@ class MainActivity : ComponentActivity() {
                     Column(modifier = Modifier.padding(innerPadding)) {
                         val navController = rememberNavController()
                         val homeViewModel: HomeViewModel = koinInject()
-//                        val screensStateModels = homeViewModel.screenStateModels.collectAsState()
-
                         LaunchedEffect(Unit) {
                             homeViewModel.setNavController(navController)
                         }

@@ -8,19 +8,26 @@ import com.tour.advisor.domain.mapper.DataMapper.Companion.toUi
 import com.tour.advisor.domain.models.ComponentItemModel
 import com.tour.advisor.domain.models.ComponentStateModel
 import com.tour.advisor.domain.models.ScreenModels
+import com.tour.advisor.domain.result.Response
 import com.tour.advisor.domain.usecases.PlacesUseCase
 import com.tour.advisor.domain.usecases.ScreenConfigUseCase
 import com.tour.advisor.logger.LoggerService
 import com.tour.advisor.presentation.dynamicUI.mapper.ComponentsMapper.Companion.toComponentItem
 import com.tour.advisor.presentation.ui.main.constants.Screen
+import com.tour.advisor.presentation.ui.main.state.UIState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
                     private val placeUseCase: PlacesUseCase,
                     private val logger: LoggerService): ViewModel() {
     private val TAG: String = this::class.java.simpleName
+
+    private val _uiState = MutableStateFlow(UIState())
+    val uiState: StateFlow<UIState> = _uiState.asStateFlow()
 
     private val _screenStateModels = MutableStateFlow<List<ScreenModels>>(emptyList())
     val screenStateModels: StateFlow<List<ScreenModels>> = _screenStateModels
@@ -39,8 +46,8 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
         navController = navigationController
     }
 
-    fun navigateToRoute(route: String, isPopBack: Boolean = false, popupBackRoute: String? = null) {
-        navController.navigate(route) {
+    fun navigateToRoute(route: String, isPopBack: Boolean = false, popupBackRoute: String? = null, argument: String? = "") {
+        navController.navigate("$route$argument") {
             if(isPopBack && popupBackRoute != null) {
                 popUpTo(popupBackRoute) { inclusive = true }
             }
@@ -55,6 +62,17 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
 
             updateScreenConfigs(screenConfigs)
         }
+    }
+
+    private fun showHideLoading(isShow: Boolean) {
+        _uiState.value = _uiState.value.copy(isLoading = isShow)
+    }
+
+    private fun showErrorMessage(isShow: Boolean, errorMsg: String? = null) {
+        if(isShow) {
+            _uiState.value = _uiState.value.copy(errorMessage = errorMsg)
+        } else
+            _uiState.value = _uiState.value.copy(errorMessage = "")
     }
 
     private fun updateScreenConfigs(screenStateModels: List<ScreenModels>) {
@@ -72,29 +90,59 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
                     homeScreenConfig.value = screenModel
                 }
 
-                Screen.PLACE_DETAILS_SCREEN -> {
+                Screen.PLACE_DETAIL_SCREEN -> {
                     detailsScreenConfig.value = screenModel
                 }
 
-                // Optionally handle unknown screen
                 else -> {
-                    // Log or ignore
+
                 }
             }
         }
     }
 
-    fun getPlaces() {
-        //Todo: Show loading for api call here
+    fun getPlaces(screen: Screen) {
+        logger.logInfo(TAG, "Calling api - getPlaces")
+        showHideLoading(isShow = true)
         viewModelScope.launch {
-            val placeList = placeUseCase.invoke()
-            placeList.forEach {
-                logger.logInfo(TAG, "Place name: ${it.placeName} Place cost: ${it.placeCost}")
+            when (val result = placeUseCase.getPlaces()) {
+                is Response.Success -> {
+                    updateComponentList(screen, "nearby_places", result.data)
+                    delay(5000)
+                    showHideLoading(isShow = false)
+                    showErrorMessage(isShow = false)
+                }
+                is Response.Error -> {
+                    showErrorMessage(isShow = true, errorMsg = result.errorMessage)
+                    showHideLoading(isShow = false)
+                }
             }
-//            _placesStateModels.emit(placeList)
+            logger.logInfo(TAG, "Finished api - getPlaces")
+        }
+    }
 
-            updateComponentList(Screen.HOME_SCREEN, "nearby_places", placeList)
-//            updateComponentList(Screen.HOME_SCREEN, "recommended_places", placeList)
+    fun callDetailsApi(screen: Screen, name: String) {
+        getPlaceDetails(screen, name)
+    }
+
+    private fun getPlaceDetails(screen: Screen, name: String) {
+        logger.logInfo(TAG, "Calling api - getPlaceDetails")
+        showHideLoading(isShow = true)
+        viewModelScope.launch {
+            when (val result = placeUseCase.getPlaceDetails(name)) {
+                is Response.Success -> {
+                    logger.logInfo(TAG, "Api response - getPlaceDetails ${result.data}")
+//                    updateComponentList(screen, "nearby_places", result.data)
+                    delay(5000)
+                    showHideLoading(isShow = false)
+                    showErrorMessage(isShow = false)
+                }
+                is Response.Error -> {
+                    showErrorMessage(isShow = true, errorMsg = result.errorMessage)
+                    showHideLoading(isShow = false)
+                }
+            }
+            logger.logInfo(TAG, "Finished api - getPlaceDetails")
         }
     }
 

@@ -26,13 +26,6 @@ fun LongCardImage(image: ComponentStateModel.Image) {
             .height(100.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        /*Image(
-            painter = painterResource(id = R.drawable.ic_app_icon),
-            contentDescription = "Card Image",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )*/
-
         AsyncImage(
             model = image.url,
             contentDescription = "Card Image",

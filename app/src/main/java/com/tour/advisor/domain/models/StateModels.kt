@@ -20,7 +20,8 @@ sealed class ComponentStateModel {
 
     data class TopBar(
         override val dataSource: String? = null,
-        val title: String
+        val title: String,
+        val showBack: Boolean? = false
     ) : ComponentStateModel()
 
     data class Text(
@@ -29,15 +30,9 @@ sealed class ComponentStateModel {
         val style: String?
     ) : ComponentStateModel()
 
-    data class ApiText(
-        override val dataSource: String? = null,
-        val value: String,
-        val style: String?
-    ) : ComponentStateModel()
-
     data class Button(
         override val dataSource: String? = null,
-        val text: String,
+        val value: String,
         val style: String,
         val onClickRoute: String
     ) : ComponentStateModel()
@@ -45,6 +40,11 @@ sealed class ComponentStateModel {
     data class Image(
         override val dataSource: String? = null,
         val url: String? = null
+    ) : ComponentStateModel()
+
+    data class ImageLocal(
+        override val dataSource: String? = null,
+        val resource: String? = null
     ) : ComponentStateModel()
 
     data class HorizontalList(
@@ -76,6 +76,6 @@ sealed class ComponentStateModel {
     ) : ComponentStateModel()
 
     data class Unknown(
-        override val dataSource: String? = null
+        override val dataSource: String? = null,
     ) : ComponentStateModel()
 }

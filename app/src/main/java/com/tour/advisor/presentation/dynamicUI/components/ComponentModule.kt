@@ -1,6 +1,5 @@
 package com.tour.advisor.presentation.dynamicUI.components
 
-import com.tour.advisor.data.screen.model.ApiTextComponent
 import com.tour.advisor.data.screen.model.ButtonComponent
 import com.tour.advisor.data.screen.model.HorizontalListComponent
 import com.tour.advisor.data.screen.model.IconComponent
@@ -28,7 +27,6 @@ val componentModule = SerializersModule {
         subclass(TextComponent::class, TextComponent.serializer())
         subclass(LongCardImageComponent::class, LongCardImageComponent.serializer())
         subclass(SmallCardImageComponent::class, SmallCardImageComponent.serializer())
-        subclass(ApiTextComponent::class, ApiTextComponent.serializer())
         subclass(IconComponent::class, IconComponent.serializer())
         subclass(ImageComponent::class, ImageComponent.serializer())
         subclass(ButtonComponent::class, ButtonComponent.serializer())

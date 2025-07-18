@@ -1,6 +1,8 @@
 package com.tour.advisor.domain.mapper
 
-import com.tour.advisor.data.screen.model.ApiTextComponent
+import com.tour.advisor.data.places.PlaceEntity
+import com.tour.advisor.data.places.model.PlaceModel
+import com.tour.advisor.data.screen.model.ButtonComponent
 import com.tour.advisor.data.screen.model.HorizontalListComponent
 import com.tour.advisor.data.screen.model.ImageComponent
 import com.tour.advisor.data.screen.model.LongCardImageComponent
@@ -26,10 +28,10 @@ class DataMapper {
 
         private fun UIComponent.toUiComponent(): ComponentStateModel {
             return when (this) {
-                is TopAppBarComponent -> ComponentStateModel.TopBar(title = title)
+                is TopAppBarComponent -> ComponentStateModel.TopBar(title = title, showBack = showBack)
                 is SplashComponent -> ComponentStateModel.Splash(components = fields.map { it.toUiComponent() })
                 is TextComponent -> ComponentStateModel.Text(value = value, style = style, dataSource = dataSource)
-                is ApiTextComponent -> ComponentStateModel.ApiText(value = value, style = style, dataSource = dataSource)
+                is ButtonComponent -> ComponentStateModel.Button(value = value, style = style, onClickRoute = onClickRoute)
                 is ImageComponent -> ComponentStateModel.Image(
                     url = resource, dataSource = dataSource
                 )
@@ -63,5 +65,15 @@ class DataMapper {
                 else -> ComponentStateModel.Unknown("")
             }
         }
+
+        fun PlaceEntity.toDomain(): PlaceModel = PlaceModel(
+            placeName = placeName,
+            placeImage = placeImage,
+            placeDescription = placeDescription,
+            placeCost = placeCost,
+            placeRating = placeRating
+        )
+
+        fun List<PlaceEntity>.toDomain(): List<PlaceModel> = map { it.toDomain() }
     }
 }

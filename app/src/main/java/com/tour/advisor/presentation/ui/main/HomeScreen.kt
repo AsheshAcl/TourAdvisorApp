@@ -1,45 +1,38 @@
 package com.tour.advisor.presentation.ui.main
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.Color
+import com.tour.advisor.presentation.ui.main.constants.Screen
 import com.tour.advisor.uicomponents.CommonScreenRender
+import com.tour.advisor.uicomponents.LoadingComponent
 
 @Composable
 fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
     val homeScreenModel = homeViewModel.homeScreenConfig.collectAsState()
+    val uiState by homeViewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
-        homeViewModel.getPlaces()
+        homeViewModel.getPlaces(screen = Screen.HOME_SCREEN)
     }
 
-    LazyColumn(
-        modifier = modifier
-//            .fillMaxSize()
-            .padding(10.dp),
-        contentPadding = PaddingValues(bottom = 16.dp)
-    ) {
-        homeScreenModel.value?.components?.let { components ->
-            items(components) { component ->
-                CommonScreenRender(
-                    components = listOf(component),
-                    homeViewModel = homeViewModel
-                )
-            }
-        }
-    }
-    /*homeScreenModel.value?.components?.let { components ->
+    homeScreenModel.value?.components?.let { components ->
         CommonScreenRender(
             components = components,
             homeViewModel = homeViewModel
         )
-    }*/
+    }
+
+    if (uiState.isLoading) {
+        LoadingComponent(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.3f)),
+        )
+    }
 }

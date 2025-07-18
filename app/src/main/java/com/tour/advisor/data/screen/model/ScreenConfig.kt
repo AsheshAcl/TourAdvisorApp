@@ -1,6 +1,5 @@
 package com.tour.advisor.data.screen.model
 
-import com.tour.advisor.presentation.ui.main.constants.Screen
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +9,7 @@ data class ScreenConfig(
     val screen_title: String = "",
     val route: String,
     val ui_components: List<UIComponent>,
-    val auto_navigate_after: Long = 3000,
+    val auto_navigate_after: Long = 0,
 //    val next_route: String? = null
 )
 
@@ -28,6 +27,7 @@ data class TopAppBarComponent(
     override val id: String,
     override val type: String,
     val title: String,
+    val showBack: Boolean? = false,
     val fields: List<UIComponent> = emptyList()
 ) : UIComponent() {
 
@@ -59,15 +59,6 @@ data class TextComponent(
 ) : UIComponent()
 
 @Serializable
-@SerialName("apiText")
-data class ApiTextComponent(
-    override val id: String,
-    override val type: String,
-    val value: String,
-    val style: String? = null
-) : UIComponent()
-
-@Serializable
 @SerialName("icon")
 data class IconComponent(
     override val id: String,
@@ -88,7 +79,7 @@ data class ImageComponent(
 data class ButtonComponent(
     override val id: String,
     override val type: String,
-    val text: String,
+    val value: String,
     val style: String,
     val onClickRoute: String
 ) : UIComponent()

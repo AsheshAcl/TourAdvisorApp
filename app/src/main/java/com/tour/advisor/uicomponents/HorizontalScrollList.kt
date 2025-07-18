@@ -22,32 +22,36 @@ fun HorizontalScrollList(
     component: ComponentStateModel.HorizontalList, homeViewModel: HomeViewModel
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        Text(
-            text = component.sectionHeader,
-            style = component.sectionHeaderStyle.getTypography(),
-            modifier = Modifier.padding(start = 16.dp, bottom = 8.dp, top = 18.dp)
+        TextComponent(
+            modifier = Modifier.padding(start = 16.dp, bottom = 8.dp, top = 18.dp),
+            ComponentStateModel.Text(
+                value = component.sectionHeader,
+                style = component.sectionHeaderStyle
+            )
         )
         LazyRow(
             contentPadding = PaddingValues(horizontal = 8.dp)
         ) {
             items(component.items) { componentData ->
-                Column {
+                if (componentData is PlaceItemModel) {
                     Column(Modifier.clickable {
                         //Todo: Fix the clickable animation
-                        homeViewModel.navigateToRoute(component.onClickRoute)
+                        homeViewModel.navigateToRoute(
+                            route = component.onClickRoute, argument = "/${componentData.title}"
+                        )
                     }) {
-                        if(componentData is PlaceItemModel) {
-                            LongCardImage(ComponentStateModel.Image(url = componentData.imageUrl))
+                        LongCardImage(ComponentStateModel.Image(url = componentData.imageUrl))
+                        componentData.title?.let {
                             TextComponent(
                                 Modifier.padding(start = 10.dp), ComponentStateModel.Text(
-                                    value = componentData.title,
-                                    style = "labelSmall"
+                                    value = it, style = "labelSmall"
                                 )
                             )
+                        }
+                        componentData.cost?.let {
                             TextComponent(
                                 Modifier.padding(start = 10.dp), ComponentStateModel.Text(
-                                    value = componentData.cost,
-                                    style = "labelMedium"
+                                    value = it, style = "labelMedium"
                                 )
                             )
                         }
