@@ -4,27 +4,49 @@
     "place_image": "https://media.architecturaldigest.com/photos/66a951edce728792a48166e6/16:9/w_1600,c_limit/GettyImages-955441104.jpg",
     "place_description": "Eiffel Tower - Iconic iron lattice tower in Paris",
     "place_cost": "Eiffel Tower - $20",
-    "place_rating": 2.3
+    "place_location": "Paris, France",
+    "place_rating": 2.3,
+    "additional_images": [
+      "https://www.snexplores.org/wp-content/uploads/2019/11/Eiffelmain_free_0.jpg",
+      "https://nikonrumors.com/wp-content/uploads/2013/12/01_Eiffel_patrikbanas_r-550x366.jpg",
+      "https://nikonrumors.com/wp-content/uploads/2013/12/03_Eiffel_patrikbanas_r.jpg",
+      "https://hips.hearstapps.com/hmg-prod/images/paris-skyline-with-eiffel-tower-on-a-sunny-day-wide-royalty-free-image-1722542465.jpg"
+    ]
   },
   {
     "place_name": "Great Wall of China",
     "place_image": "https://ychef.files.bbci.co.uk/624x351/p08m61wb.jpg",
     "place_description": "France",
     "place_cost": "Machu Picchu - $50",
-    "place_rating": 0.4
+    "place_location": "Cusco, Peru",
+    "place_rating": 0.4,
+    "additional_images": [
+      "https://www.snexplores.org/wp-content/uploads/2019/11/Eiffelmain_free_0.jpg",
+      "https://nikonrumors.com/wp-content/uploads/2013/12/01_Eiffel_patrikbanas_r-550x366.jpg",
+      "https://nikonrumors.com/wp-content/uploads/2013/12/03_Eiffel_patrikbanas_r.jpg",
+      "https://hips.hearstapps.com/hmg-prod/images/paris-skyline-with-eiffel-tower-on-a-sunny-day-wide-royalty-free-image-1722542465.jpg"
+    ]
   },
   {
     "place_name": "Machu Picchu",
     "place_image": "https://caminoincamachupicchu.org/cmingutd/wp-content/uploads/2021/06/machu-picchu-llama.jpg",
     "place_description": "Machu Picchu - Ancient Incan citadel in Peru",
-    "place_cost": "Great Wall of China - $30",
-    "place_rating": 3.5
+    "place_cost": "$30/Per person",
+    "place_location": "Beijing, China",
+    "place_rating": 3.5,
+    "additional_images": [
+      "https://www.snexplores.org/wp-content/uploads/2019/11/Eiffelmain_free_0.jpg",
+      "https://nikonrumors.com/wp-content/uploads/2013/12/01_Eiffel_patrikbanas_r-550x366.jpg",
+      "https://nikonrumors.com/wp-content/uploads/2013/12/03_Eiffel_patrikbanas_r.jpg",
+      "https://hips.hearstapps.com/hmg-prod/images/paris-skyline-with-eiffel-tower-on-a-sunny-day-wide-royalty-free-image-1722542465.jpg"
+    ]
   },
   {
     "place_name": "Taj Mahal",
     "place_image": "https://static.wixstatic.com/media/c8ce33_0b04ed009319494c902b146dc9baf028~mv2.jpg/v1/fit/w_1281,h_701,q_90,enc_avif,quality_auto/c8ce33_0b04ed009319494c902b146dc9baf028~mv2.jpg",
     "place_description": "Great Wall of China - Series of fortifications in China",
     "place_cost": "Taj Mahal - $40",
+    "place_location": "Agra, India",
     "place_rating": 3.7
   },
   {
@@ -32,6 +54,7 @@
     "place_image": "https://d3rr2gvhjw0wwy.cloudfront.net/uploads/mandators/49581/file-manager/egyptian-pyramid-egyptian-pyramids-facts.jpg",
     "place_description": "Santorini - Greek island known for its white buildings and blue domes",
     "place_cost": "Pyramids of Giza - $25",
+    "place_location": "Al Haram, Egypt",
     "place_rating": 3
   },
   {
@@ -39,27 +62,31 @@
     "place_image": "https://image.kesari.in/upload/EC/Santorini-kesari-tours.jpg",
     "place_description": "Taj Mahal - Marble mausoleum in Agra",
     "place_cost": "Statue of Liberty - $35",
+    "place_location": "New York, USA",
     "place_rating": 4.1
   },
   {
     "place_name": "Grand Canyon",
     "place_image": "https://www.nps.gov/grca/planyourvisit/images/mather-point-2021.jpg?maxwidth=1300&maxheight=1300&autorotate=false&format=webp",
-    "place_description": "India",
-    "place_cost": "Santorini - $60",
+    "place_description": "Grand Canyon",
+    "place_cost": "Grand Canyon - $60",
+    "place_location": "Arizona, USA",
     "place_rating": 0.7
   },
   {
     "place_name": "Petra",
     "place_image": "https://www.wondersoflondon.com/wp-content/uploads/virtual-tour-petra.jpg",
-    "place_description": "Pyramids of Giza - Ancient Egyptian pyramids",
-    "place_cost": "Colosseum - $45",
+    "place_description": "Petra, an ancient city, is located in southwestern Jordan, nestled in the desert canyons. It's situated on a terrace, bisected by the Wadi Mūsā (Valley of Moses).",
+    "place_cost": "Southwestern Jordan - $45",
+    "place_location": "Southwestern Jordan",
     "place_rating": 3
   },
   {
     "place_name": "Colosseum",
     "place_image": "https://cdn-web.greenlinetours.com/uploads/2022/11/22/thumb/s_en_w800_h500/when-was-roman-colosseum-built-512.jpg",
     "place_description": "Venice - Italian city known for its canals",
-    "place_cost": "Petra - $55",
+    "place_cost": "Colosseum - $55",
+    "place_location": "Rome, Italy",
     "place_rating": 1
   },
   {
@@ -67,6 +94,7 @@
     "place_image": "https://canadiangeographic.ca/wp-content/uploads/2022/02/35425328-the_falls_at_sunrise-1440x884.jpg",
     "place_description": "Petra - Ancient city in Jordan",
     "place_cost": "Bora Bora - $70",
+    "place_location": "Ontario, Canada",
     "place_rating": 1.9
   }
 ]

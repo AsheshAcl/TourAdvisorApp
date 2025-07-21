@@ -95,8 +95,16 @@ data class LoadingIndicatorComponent(
 @SerialName("image_slider")
 data class ImageSliderComponent(
     override val id: String,
+    override val type: String
+) : UIComponent()
+
+@Serializable
+@SerialName("description")
+data class DescriptionComponent(
+    override val id: String,
     override val type: String,
-    val resources: List<String>
+    val section_header: String,
+    val section_header_style: String,
 ) : UIComponent()
 
 @Serializable
@@ -141,8 +149,7 @@ data class SmallCardImageComponent(
 @SerialName("info_row")
 data class InfoRowComponent(
     override val id: String,
-    override val type: String,
-    val items: List<InfoRowItem>
+    override val type: String
 ) : UIComponent()
 
 @SerialName("rating_single")

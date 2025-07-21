@@ -9,6 +9,7 @@ data class PlaceEntity(
     val placeImage: String? = null,
     val placeDescription: String? = null,
     val placeCost: String? = null,
+    val placeLocation: String? = null,
     val placeRating: Double? = null,
-
+    val additionalImages: List<String>? = emptyList()
 )

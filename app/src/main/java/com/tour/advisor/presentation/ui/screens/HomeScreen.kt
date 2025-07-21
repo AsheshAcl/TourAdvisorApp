@@ -1,4 +1,4 @@
-package com.tour.advisor.presentation.ui.main
+package com.tour.advisor.presentation.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,25 +8,20 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.navigation.NavController
-import com.tour.advisor.logger.LoggerService
-import com.tour.advisor.presentation.ui.main.constants.Screen
-import com.tour.advisor.uicomponents.CommonScreenRender
+import com.tour.advisor.presentation.ui.constants.Screen
+import com.tour.advisor.presentation.ui.common.CommonScreenRender
 import com.tour.advisor.uicomponents.LoadingComponent
-import org.koin.compose.koinInject
 
 @Composable
-fun PlaceDetailsScreen(modifier: Modifier, homeViewModel: HomeViewModel, navController: NavController,
-                       placeName: String) {
-    val appLogger: LoggerService = koinInject()
-    val placeDetailsScreenModel = homeViewModel.detailsScreenConfig.collectAsState()
+fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
+    val homeScreenModel = homeViewModel.homeScreenConfig.collectAsState()
     val uiState by homeViewModel.uiState.collectAsState()
 
-    LaunchedEffect(placeName) {
-        homeViewModel.callDetailsApi(Screen.PLACE_DETAIL_SCREEN, placeName)
+    LaunchedEffect(Unit) {
+        homeViewModel.getPlaces(screen = Screen.HOME_SCREEN)
     }
 
-    placeDetailsScreenModel.value?.components?.let { components ->
+    homeScreenModel.value?.components?.let { components ->
         CommonScreenRender(
             components = components,
             homeViewModel = homeViewModel

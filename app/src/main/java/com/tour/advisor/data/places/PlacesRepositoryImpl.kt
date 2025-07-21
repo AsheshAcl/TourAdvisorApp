@@ -20,7 +20,9 @@ class PlacesRepositoryImpl(private val remoteSource: DataRemoteDataSource,
                     placeImage = it.placeImage,
                     placeDescription = it.placeDescription,
                     placeCost = it.placeCost,
-                    placeRating = it.placeRating
+                    placeLocation = it.placeLocation,
+                    placeRating = it.placeRating,
+                    additionalImages = it.additionalImages
                 )
             })
             Response.Success(remoteScreens)
@@ -28,7 +30,7 @@ class PlacesRepositoryImpl(private val remoteSource: DataRemoteDataSource,
             logger.logError("PlacesRepositoryImpl", "Using fallback from DB: ${e.message}")
             return try {
                 val localEntities = dao.getPlaces()
-                val localModels = localEntities.map { it.toDomain() }
+                val localModels = localEntities.toDomain()
                 Response.Success(localModels)
             } catch (dbException: Exception) {
                 logger.logError("PlacesRepositoryImpl", "DB fallback failed: ${dbException.message}")

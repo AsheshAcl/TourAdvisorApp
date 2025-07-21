@@ -1,4 +1,4 @@
-package com.tour.advisor.uicomponents
+package com.tour.advisor.presentation.ui.common
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,7 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
-import com.tour.advisor.presentation.ui.main.HomeViewModel
+import com.tour.advisor.presentation.ui.screens.HomeViewModel
+import com.tour.advisor.uicomponents.ButtonComponent
+import com.tour.advisor.uicomponents.DescriptionComponent
+import com.tour.advisor.uicomponents.HorizontalScrollList
+import com.tour.advisor.uicomponents.ImageSliderComponent
+import com.tour.advisor.uicomponents.SplashComponent
+import com.tour.advisor.uicomponents.TextComponent
+import com.tour.advisor.uicomponents.TopAppBar
+import com.tour.advisor.uicomponents.VerticalScrollList
 
 @Composable
 fun CommonScreenRender(
@@ -21,7 +29,7 @@ fun CommonScreenRender(
     Column(modifier = Modifier.fillMaxSize()) {
         components.forEach { component ->
             when (component) {
-                is ComponentStateModel.TopBar -> TopAppBar(component)
+                is ComponentStateModel.TopBar -> TopAppBar(component, homeViewModel::navigateBack)
                 is ComponentStateModel.Splash -> SplashComponent(component)
                 else -> {
 
@@ -43,6 +51,9 @@ fun CommonScreenRender(
                     is ComponentStateModel.VerticalList -> VerticalScrollList(
                         component, homeViewModel = homeViewModel
                     )
+
+                    is ComponentStateModel.ImageSlider -> ImageSliderComponent(component)
+                    is ComponentStateModel.Description -> DescriptionComponent(component)
 
                     /*is ComponentStateModel.LongCard -> LongCardImage(ComponentStateModel.Image())
                     is ComponentStateModel.SmallCard -> SmallCardImage(ComponentStateModel.Image())*/

@@ -1,6 +1,6 @@
 package com.tour.advisor.di
 
-import com.tour.advisor.presentation.ui.main.HomeViewModel
+import com.tour.advisor.presentation.ui.screens.HomeViewModel
 import com.tour.advisor.presentation.utility.assetloader.AndroidAssetLoader
 import com.tour.advisor.presentation.utility.assetloader.AssetLoader
 import org.koin.android.ext.koin.androidContext

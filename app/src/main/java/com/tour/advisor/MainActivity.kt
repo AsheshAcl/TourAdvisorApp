@@ -9,11 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.tour.advisor.navigation.AppNavigation
-import com.tour.advisor.presentation.ui.main.HomeViewModel
+import com.tour.advisor.presentation.ui.screens.HomeViewModel
 import com.tour.advisor.presentation.ui.theme.TourAdvisorAppTheme
 import org.koin.compose.koinInject
 

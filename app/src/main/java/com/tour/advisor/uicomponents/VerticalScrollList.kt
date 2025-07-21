@@ -9,14 +9,12 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
-import com.tour.advisor.domain.models.PlaceItemModel
-import com.tour.advisor.presentation.ui.main.HomeViewModel
-import com.tour.advisor.presentation.utility.UIUtils.Companion.getTypography
+import com.tour.advisor.domain.models.InfoItemModel
+import com.tour.advisor.presentation.ui.screens.HomeViewModel
 
 @Composable
 fun VerticalScrollList(component: ComponentStateModel.VerticalList, homeViewModel: HomeViewModel) {
@@ -32,7 +30,7 @@ fun VerticalScrollList(component: ComponentStateModel.VerticalList, homeViewMode
             modifier = Modifier.heightIn(max = 300.dp)
         ) {
             items(component.items) { componentData ->
-                if (componentData is PlaceItemModel) {
+                if (componentData is InfoItemModel) {
                     Row(modifier = Modifier
                         .fillMaxWidth()
                         .clickable {
@@ -52,7 +50,7 @@ fun VerticalScrollList(component: ComponentStateModel.VerticalList, homeViewMode
                                     )
                                 )
                             }
-                            componentData.cost?.let {
+                            componentData.rightTag?.let {
                                 TextComponent(
                                     Modifier.padding(start = 10.dp), ComponentStateModel.Text(
                                         value = it, style = "titleMedium"

@@ -7,19 +7,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.tour.advisor.domain.models.ComponentItemModel
 import com.tour.advisor.domain.models.ComponentStateModel
-import com.tour.advisor.domain.models.PlaceItemModel
-import com.tour.advisor.presentation.ui.main.HomeViewModel
-import com.tour.advisor.presentation.utility.UIUtils.Companion.getTypography
+import com.tour.advisor.domain.models.InfoItemModel
+import com.tour.advisor.presentation.ui.screens.HomeViewModel
 
 @Composable
 fun HorizontalScrollList(
-    component: ComponentStateModel.HorizontalList, homeViewModel: HomeViewModel
+    component: ComponentStateModel.HorizontalList, homeViewModel: HomeViewModel? = null
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         TextComponent(
@@ -33,10 +30,10 @@ fun HorizontalScrollList(
             contentPadding = PaddingValues(horizontal = 8.dp)
         ) {
             items(component.items) { componentData ->
-                if (componentData is PlaceItemModel) {
+                if (componentData is InfoItemModel) {
                     Column(Modifier.clickable {
                         //Todo: Fix the clickable animation
-                        homeViewModel.navigateToRoute(
+                        homeViewModel?.navigateToRoute(
                             route = component.onClickRoute, argument = "/${componentData.title}"
                         )
                     }) {
@@ -48,7 +45,7 @@ fun HorizontalScrollList(
                                 )
                             )
                         }
-                        componentData.cost?.let {
+                        componentData.rightTag?.let {
                             TextComponent(
                                 Modifier.padding(start = 10.dp), ComponentStateModel.Text(
                                     value = it, style = "labelMedium"
@@ -58,14 +55,6 @@ fun HorizontalScrollList(
                     }
                 }
             }
-        }
-    }
-}
-
-fun getValueForDataSource(dataSource: String?, componentData: ComponentItemModel) {
-    when(componentData) {
-        is PlaceItemModel -> {
-//            if(dataSource == componentData)
         }
     }
 }

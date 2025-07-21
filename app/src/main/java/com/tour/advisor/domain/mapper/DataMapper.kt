@@ -3,8 +3,10 @@ package com.tour.advisor.domain.mapper
 import com.tour.advisor.data.places.PlaceEntity
 import com.tour.advisor.data.places.model.PlaceModel
 import com.tour.advisor.data.screen.model.ButtonComponent
+import com.tour.advisor.data.screen.model.DescriptionComponent
 import com.tour.advisor.data.screen.model.HorizontalListComponent
 import com.tour.advisor.data.screen.model.ImageComponent
+import com.tour.advisor.data.screen.model.ImageSliderComponent
 import com.tour.advisor.data.screen.model.LongCardImageComponent
 import com.tour.advisor.data.screen.model.ScreenConfig
 import com.tour.advisor.data.screen.model.SmallCardImageComponent
@@ -14,8 +16,9 @@ import com.tour.advisor.data.screen.model.TopAppBarComponent
 import com.tour.advisor.data.screen.model.UIComponent
 import com.tour.advisor.data.screen.model.VerticalListComponent
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.domain.models.InfoItemModel
 import com.tour.advisor.domain.models.ScreenModels
-import com.tour.advisor.presentation.ui.main.constants.Screen
+import com.tour.advisor.presentation.ui.constants.Screen
 
 class DataMapper {
     companion object {
@@ -62,6 +65,16 @@ class DataMapper {
                     dataSource = dataSource
                 )
 
+                is DescriptionComponent -> ComponentStateModel.Description(
+                    dataSource = dataSource,
+                    sectionHeader = section_header,
+                    sectionHeaderStyle = section_header_style
+                )
+
+                is ImageSliderComponent -> ComponentStateModel.ImageSlider(
+                    dataSource = dataSource
+                )
+
                 else -> ComponentStateModel.Unknown("")
             }
         }
@@ -71,9 +84,23 @@ class DataMapper {
             placeImage = placeImage,
             placeDescription = placeDescription,
             placeCost = placeCost,
-            placeRating = placeRating
+            placeLocation = placeLocation,
+            placeRating = placeRating,
+            additionalImages = additionalImages
         )
 
         fun List<PlaceEntity>.toDomain(): List<PlaceModel> = map { it.toDomain() }
+
+        fun PlaceModel.toComponentItem(): InfoItemModel {
+            return InfoItemModel(
+                title = placeName,
+                imageUrl = placeImage,
+                subtitle = placeDescription,
+                value = placeRating.toString(),
+                leftTag = placeLocation,
+                rightTag = placeCost,
+                additionalImages = additionalImages
+            )
+        }
     }
 }

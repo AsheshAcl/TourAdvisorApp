@@ -1,4 +1,4 @@
-package com.tour.advisor.presentation.ui.main.state
+package com.tour.advisor.presentation.ui.state
 
 import com.tour.advisor.domain.result.Response
 

@@ -1,6 +1,6 @@
 package com.tour.advisor.domain.models
 
-import com.tour.advisor.presentation.ui.main.constants.Screen
+import com.tour.advisor.presentation.ui.constants.Screen
 
 data class ScreenModels(
     val name: Screen?,
@@ -47,14 +47,24 @@ sealed class ComponentStateModel {
         val resource: String? = null
     ) : ComponentStateModel()
 
+    interface SectionBaseComponent {
+        val sectionHeader: String
+        val sectionHeaderStyle: String
+    }
+    sealed class BaseListComponent : ComponentStateModel(), SectionBaseComponent {
+        abstract val fields: List<ComponentStateModel>
+        abstract var items: List<ComponentItemModel>
+        abstract val onClickRoute: String
+    }
+
     data class HorizontalList(
         override val dataSource: String? = null,
-        val sectionHeader: String,
-        val sectionHeaderStyle: String,
-        val fields: List<ComponentStateModel>,
-        var items: List<ComponentItemModel>,
-        val onClickRoute: String
-    ) : ComponentStateModel()
+        override val sectionHeader: String,
+        override val sectionHeaderStyle: String,
+        override val fields: List<ComponentStateModel>,
+        override var items: List<ComponentItemModel>,
+        override val onClickRoute: String
+    ) : BaseListComponent()
 
     data class LongCard(
         override val dataSource: String? = null,
@@ -63,16 +73,35 @@ sealed class ComponentStateModel {
 
     data class VerticalList(
         override val dataSource: String? = null,
-        val sectionHeader: String,
-        val sectionHeaderStyle: String,
-        val fields: List<ComponentStateModel>,
-        var items: List<ComponentItemModel>,
-        val onClickRoute: String
-    ) : ComponentStateModel()
+        override val sectionHeader: String,
+        override val sectionHeaderStyle: String,
+        override val fields: List<ComponentStateModel>,
+        override var items: List<ComponentItemModel>,
+        override val onClickRoute: String
+    ) : BaseListComponent()
 
     data class SmallCard(
         override val dataSource: String? = null,
         val value: String?
+    ) : ComponentStateModel()
+
+    data class ImageSlider(
+        override val dataSource: String? = null,
+        val urlList: List<String>? = emptyList(),
+    ) : ComponentStateModel()
+
+    data class Description(
+        override val dataSource: String? = null,
+        override val sectionHeader: String,
+        override val sectionHeaderStyle: String,
+        val value: String? = null
+    ) : ComponentStateModel(), SectionBaseComponent
+
+    data class Info(
+        override val dataSource: String? = null,
+        val infoTitle: String?,
+        val leftTag: String?,
+        val rightTag: String?,
     ) : ComponentStateModel()
 
     data class Unknown(

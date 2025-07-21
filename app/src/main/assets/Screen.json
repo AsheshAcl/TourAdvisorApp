@@ -250,67 +250,24 @@
         "title": "Tour details"
       },
       {
-        "id": "place_title",
-        "componentType": "text",
-        "type": "text",
-        "value": "placeName",
-        "data_source": "place_name",
-        "style": "headlineLarge"
+        "id": "place_info_row",
+        "componentType": "info_row",
+        "type": "info_row"
       },
       {
         "id": "place_images_slider",
         "componentType": "image_slider",
         "type": "image_slider",
-        "resources": [
-          "ic_place_1",
-          "ic_place_2",
-          "ic_place_3"
-        ]
-      },
-      {
-        "id": "place_description_label",
-        "componentType": "text",
-        "type": "text",
-        "value": "Description",
-        "style": "headlineSmall"
+        "data_source": "additional_images"
       },
       {
         "id": "place_description",
-        "componentType": "text",
-        "type": "text",
-        "value": "placeDescription",
+        "componentType": "description",
+        "type": "description",
+        "section_header": "Description",
+        "section_header_style": "titleMedium",
         "data_source": "placeDescription",
-        "style": "bodyLarge"
-      },
-      {
-        "id": "place_cost",
-        "componentType": "text",
-        "type": "text",
-        "value": "placeCost",
-        "data_source": "place_cost",
-        "style": "titleSmall"
-      },
-      {
-        "id": "place_info_row",
-        "componentType": "info_row",
-        "type": "info_row",
-        "items": [
-          {
-            "id": "card_details_name",
-            "type": "text",
-            "style": "bodyMedium"
-          },
-          {
-            "id": "card_details_cost",
-            "type": "text",
-            "style": "bodyMedium"
-          },
-          {
-            "id": "card_details_rating",
-            "type": "rating",
-            "resource": "$ic_rating"
-          }
-        ]
+        "style": "titleMedium"
       },
       {
         "id": "place_save_button",

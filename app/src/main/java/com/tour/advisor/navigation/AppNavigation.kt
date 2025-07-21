@@ -7,10 +7,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.tour.advisor.presentation.ui.main.HomeScreen
-import com.tour.advisor.presentation.ui.main.HomeViewModel
-import com.tour.advisor.presentation.ui.main.PlaceDetailsScreen
-import com.tour.advisor.presentation.ui.main.SplashScreen
+import com.tour.advisor.presentation.ui.screens.HomeScreen
+import com.tour.advisor.presentation.ui.screens.HomeViewModel
+import com.tour.advisor.presentation.ui.screens.PlaceDetailsScreen
+import com.tour.advisor.presentation.ui.screens.SplashScreen
 
 @Composable
 fun AppNavigation(
