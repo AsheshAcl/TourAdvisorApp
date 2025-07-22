@@ -34,7 +34,7 @@ fun DescriptionComponent(component: ComponentStateModel.Description, homeViewMod
             DescriptionText(
                 text = it,
                 modifier = Modifier.padding(16.dp),
-                color = Color.White
+                color = MaterialTheme.colorScheme.primary
             )
         }
     }

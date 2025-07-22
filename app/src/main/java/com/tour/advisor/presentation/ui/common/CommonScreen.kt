@@ -15,6 +15,7 @@ import com.tour.advisor.uicomponents.ButtonComponent
 import com.tour.advisor.uicomponents.DescriptionComponent
 import com.tour.advisor.uicomponents.HorizontalScrollList
 import com.tour.advisor.uicomponents.ImageSliderComponent
+import com.tour.advisor.uicomponents.InfoComponent
 import com.tour.advisor.uicomponents.SplashComponent
 import com.tour.advisor.uicomponents.TextComponent
 import com.tour.advisor.uicomponents.TopAppBar
@@ -37,7 +38,7 @@ fun CommonScreenRender(
             }
         }
         LazyColumn(
-            modifier = modifier.padding(10.dp), contentPadding = PaddingValues(bottom = 16.dp)
+//            modifier = modifier.padding(10.dp), contentPadding = PaddingValues(bottom = 16.dp)
         ) {
             items(components) { component ->
                 when (component) {
@@ -52,6 +53,7 @@ fun CommonScreenRender(
                         component, homeViewModel = homeViewModel
                     )
 
+                    is ComponentStateModel.Info -> InfoComponent(component)
                     is ComponentStateModel.ImageSlider -> ImageSliderComponent(component)
                     is ComponentStateModel.Description -> DescriptionComponent(component)
 

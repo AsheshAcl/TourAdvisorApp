@@ -7,8 +7,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,7 +25,16 @@ fun InfoComponent(component: ComponentStateModel.Info, homeViewModel: HomeViewMo
         /*homeViewModel?.navigateToRoute(
             route = component.onClickRoute, argument = "/${componentData.title}"
         )*/
-    }.background(color = Color.White)) {
+    }
+        .shadow(
+            elevation = 4.dp,
+            shape = RoundedCornerShape(bottomStart = 8.dp, bottomEnd = 8.dp),
+            clip = false // shadow will be outside the shape
+        )
+        .clip(RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp))
+        .background(Color.White)
+        .padding(16.dp)
+    ) {
         component.infoTitle?.let {
             TextComponent(
                 Modifier.padding(start = 10.dp), ComponentStateModel.Text(
@@ -31,7 +43,7 @@ fun InfoComponent(component: ComponentStateModel.Info, homeViewModel: HomeViewMo
             )
         }
 
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+        Row(modifier = Modifier.fillMaxWidth().padding(top = 10.dp), horizontalArrangement = Arrangement.SpaceBetween) {
             component.leftTag?.let {
                 TextComponent(
                     Modifier.padding(start = 10.dp), ComponentStateModel.Text(

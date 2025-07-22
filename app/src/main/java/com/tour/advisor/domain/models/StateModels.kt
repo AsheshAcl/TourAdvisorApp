@@ -99,9 +99,9 @@ sealed class ComponentStateModel {
 
     data class Info(
         override val dataSource: String? = null,
-        val infoTitle: String?,
-        val leftTag: String?,
-        val rightTag: String?,
+        val infoTitle: String? = null,
+        val leftTag: String? = null,
+        val rightTag: String? = null
     ) : ComponentStateModel()
 
     data class Unknown(

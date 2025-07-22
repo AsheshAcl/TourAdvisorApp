@@ -13,6 +13,7 @@ import com.tour.advisor.domain.usecases.ScreenConfigUseCase
 import com.tour.advisor.logger.LoggerService
 import com.tour.advisor.presentation.ui.constants.Screen
 import com.tour.advisor.presentation.ui.state.UIState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -109,7 +110,7 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
                 is Response.Success -> {
                     _placesStateModels.emit(result.data)
                     updateComponentList(screen, "nearby_places", result.data)
-//                    delay(5000)
+                    delay(2000)
                     showHideLoading(isShow = false)
                     showErrorMessage(isShow = false)
                 }
@@ -173,7 +174,8 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
                     _placeDetailsStateModels.emit(result.data)
                     updatePlaceDetailsComponent(screen, "additional_images", result.data)
                     updatePlaceDetailsComponent(screen, "placeDescription", result.data)
-//                    delay(5000)
+                    updatePlaceDetailsComponent(screen, "place_info_row", result.data)
+                    delay(2000)
                     showHideLoading(isShow = false)
                     showErrorMessage(isShow = false)
                 }
@@ -212,6 +214,9 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
                     }
                     is ComponentStateModel.Description -> {
                         component.copy(value = newItem.subtitle)
+                    }
+                    is ComponentStateModel.Info -> {
+                        component.copy(infoTitle = newItem.title, leftTag = newItem.leftTag, rightTag = newItem.rightTag)
                     }
                     else -> component
                 }

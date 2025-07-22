@@ -7,6 +7,7 @@ import com.tour.advisor.data.screen.model.DescriptionComponent
 import com.tour.advisor.data.screen.model.HorizontalListComponent
 import com.tour.advisor.data.screen.model.ImageComponent
 import com.tour.advisor.data.screen.model.ImageSliderComponent
+import com.tour.advisor.data.screen.model.InfoRowComponent
 import com.tour.advisor.data.screen.model.LongCardImageComponent
 import com.tour.advisor.data.screen.model.ScreenConfig
 import com.tour.advisor.data.screen.model.SmallCardImageComponent
@@ -75,6 +76,10 @@ class DataMapper {
                     dataSource = dataSource
                 )
 
+                is InfoRowComponent -> ComponentStateModel.Info(
+                    dataSource = dataSource
+                )
+
                 else -> ComponentStateModel.Unknown("")
             }
         }
@@ -99,7 +104,7 @@ class DataMapper {
                 value = placeRating.toString(),
                 leftTag = placeLocation,
                 rightTag = placeCost,
-                additionalImages = additionalImages
+                additionalImages = listOfNotNull(placeImage) + (additionalImages ?: emptyList())
             )
         }
     }
