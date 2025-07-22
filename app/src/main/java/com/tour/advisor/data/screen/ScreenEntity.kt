@@ -5,6 +5,37 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "screen_config")
 data class ScreenEntity(
-    @PrimaryKey val screen_name: String,
-    val jsonData: String // store raw json for each screen
+    @PrimaryKey(autoGenerate = false)
+    val screen_name: String,
+    val screenTitle: String?,
+    val route: String,
+    val uiComponentsJson: String,
+    val autoNavigateAfter: Long? = null
+)
+
+data class UiComponent(
+    val componentType: String,
+    val data_source: String,
+    val fields: List<Field>,
+    val id: String,
+    val onClickRoute: String,
+    val section_header: String,
+    val section_header_style: String,
+    val showBack: String,
+    val style: String,
+    val title: String,
+    val type: String,
+    val value: String
+)
+
+data class Field(
+    val componentType: String,
+    val data_source: String,
+    val id: String,
+    val onClickRoute: String,
+    val resource: String,
+    val resources: List<String>,
+    val style: String,
+    val type: String,
+    val value: String
 )

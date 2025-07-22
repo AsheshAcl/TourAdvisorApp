@@ -1,4 +1,4 @@
-package com.tour.advisor.data.parser
+package com.tour.advisor.data.db.converter
 
 import androidx.room.TypeConverter
 import kotlinx.serialization.encodeToString

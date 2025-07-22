@@ -6,16 +6,16 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ScreenConfig(
     val screen_name: String,
-    val screen_title: String = "",
+    val screen_title: String? = null,
     val route: String,
     val ui_components: List<UIComponent>,
-    val auto_navigate_after: Long = 0,
-//    val next_route: String? = null
+    val auto_navigate_after: Long? = 0
 )
 
 @Serializable
 sealed class UIComponent {
     abstract val id: String
+    @SerialName("type")
     abstract val type: String
     @SerialName("data_source")
     val dataSource: String? = null
