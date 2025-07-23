@@ -19,7 +19,7 @@ val dataModule = module {
     single {
         Room.databaseBuilder(get(), AppDatabase::class.java, "screen-db").addMigrations(DBMigration.MIGRATION_1_2).build()
     }
-    single { JsonAssetParser(get(), get(), get()) }
+    single { JsonAssetParser(get(), get()) }
 
     // Screens module
     single { get<AppDatabase>().screenDao() }

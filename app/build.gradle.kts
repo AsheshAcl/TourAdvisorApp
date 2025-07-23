@@ -3,9 +3,9 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     kotlin("plugin.serialization") version "1.9.22"
-    id("com.google.devtools.ksp") version "2.0.21-1.0.25"
+    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
+//    id("dagger.hilt.android.plugin")
 }
-
 android {
     namespace = "com.tour.advisor"
     compileSdk = 35
@@ -70,4 +70,15 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+    implementation("com.google.devtools.ksp:symbol-processing-api:2.2.0-2.0.2")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.0")
+    // Hilt
+/*    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)*/
+    // Hilt: For ViewModel injection
+    /*implementation(libs.androidx.hilt.lifecycle.viewmodel)
+    ksp(libs.androidx.hilt.compiler)*/
+
+    implementation(project(":annotations"))
+    ksp(project(":ksp-processor"))
 }

@@ -3,6 +3,7 @@ package com.tour.advisor.presentation.ui.screens
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.tour.advisor.data.screen.model.ScreenConfig
 import com.tour.advisor.domain.mapper.DataMapper.Companion.toUi
 import com.tour.advisor.domain.models.ComponentStateModel
 import com.tour.advisor.domain.models.InfoItemModel
@@ -30,6 +31,9 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
     private val _uiState = MutableStateFlow(UIState())
     val uiState: StateFlow<UIState> = _uiState.asStateFlow()
 
+    private val _screenConfigStateModels = MutableStateFlow<List<ScreenConfig>>(emptyList())
+    val screenConfigStateModels: StateFlow<List<ScreenConfig>> = _screenConfigStateModels
+
     private val _screenStateModels = MutableStateFlow<List<ScreenModels>>(emptyList())
     val screenStateModels: StateFlow<List<ScreenModels>> = _screenStateModels
 
@@ -38,11 +42,6 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
 
     private val _placeDetailsStateModels: MutableStateFlow<InfoItemModel?> = MutableStateFlow<InfoItemModel?>(null)
     val placeDetailsStateModels: StateFlow<InfoItemModel?> = _placeDetailsStateModels
-
-/*    val splashScreenStateModel = MutableStateFlow<ScreenModels?>(null)
-    val onboardingScreenConfig = MutableStateFlow<ScreenModels?>(null)
-    val homeScreenConfig = MutableStateFlow<ScreenModels?>(null)
-    val detailsScreenConfig = MutableStateFlow<ScreenModels?>(null)*/
 
     val splashScreenStateModel: StateFlow<ScreenModels?> = _screenStateModels
         .map { it.find { model -> model.name == Screen.SPLASH_SCREEN } }
@@ -83,6 +82,7 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
             val screens = getScreenConfigUseCase()
             val screenConfigs = screens.map { it.toUi() }
             _screenStateModels.emit(screenConfigs)
+//            _screenConfigStateModels.emit(screens)
         }
     }
 

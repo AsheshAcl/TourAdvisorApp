@@ -4,4 +4,11 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose) apply false
     kotlin("plugin.serialization") version "1.9.22"
+    alias(libs.plugins.jetbrains.kotlin.jvm) apply false
+}
+
+buildscript {
+/*    dependencies {
+        classpath(libs.hilt.android.gradle.plugin)
+    }*/
 }

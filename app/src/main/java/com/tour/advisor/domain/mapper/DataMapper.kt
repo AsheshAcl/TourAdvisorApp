@@ -30,14 +30,14 @@ class DataMapper {
                 components = ui_components.map { it.toUiComponent() })
         }
 
-        private fun UIComponent.toUiComponent(): ComponentStateModel {
+        fun UIComponent.toUiComponent(): ComponentStateModel {
             return when (this) {
-                is TopAppBarComponent -> ComponentStateModel.TopBar(title = title, showBack = showBack)
-                is SplashComponent -> ComponentStateModel.Splash(components = fields.map { it.toUiComponent() })
-                is TextComponent -> ComponentStateModel.Text(value = value, style = style, dataSource = dataSource)
-                is ButtonComponent -> ComponentStateModel.Button(value = value, style = style, onClickRoute = onClickRoute)
+                is TopAppBarComponent -> ComponentStateModel.TopBar(title = title, showBack = showBack, type = type)
+                is SplashComponent -> ComponentStateModel.Splash(components = fields.map { it.toUiComponent() }, type = type)
+                is TextComponent -> ComponentStateModel.Text(value = value, style = style, dataSource = dataSource, type = type)
+                is ButtonComponent -> ComponentStateModel.Button(value = value, style = style, onClickRoute = onClickRoute, type = type)
                 is ImageComponent -> ComponentStateModel.Image(
-                    url = resource, dataSource = dataSource
+                    url = resource, dataSource = dataSource, type = type
                 )
                 is HorizontalListComponent -> ComponentStateModel.HorizontalList(
                     sectionHeader = section_header,
@@ -45,7 +45,8 @@ class DataMapper {
                     fields = fields.map { it.toUiComponent() },
                     items = emptyList(),
                     onClickRoute = onClickRoute,
-                    dataSource = dataSource
+                    dataSource = dataSource,
+                    type = type
                 )
                 is VerticalListComponent -> ComponentStateModel.VerticalList(
                     sectionHeader = section_header,
@@ -53,31 +54,37 @@ class DataMapper {
                     fields = fields.map { it.toUiComponent() },
                     onClickRoute = onClickRoute,
                     items = emptyList(),
-                    dataSource = dataSource
+                    dataSource = dataSource,
+                    type = type
                 )
 
                 is LongCardImageComponent -> ComponentStateModel.LongCard(
                     value = resource,
-                    dataSource = dataSource
+                    dataSource = dataSource,
+                    type = type
                 )
 
                 is SmallCardImageComponent -> ComponentStateModel.SmallCard(
                     value = resource,
-                    dataSource = dataSource
+                    dataSource = dataSource,
+                    type = type
                 )
 
                 is DescriptionComponent -> ComponentStateModel.Description(
                     dataSource = dataSource,
                     sectionHeader = section_header,
-                    sectionHeaderStyle = section_header_style
+                    sectionHeaderStyle = section_header_style,
+                    type = type
                 )
 
                 is ImageSliderComponent -> ComponentStateModel.ImageSlider(
-                    dataSource = dataSource
+                    dataSource = dataSource,
+                    type = type
                 )
 
                 is InfoRowComponent -> ComponentStateModel.Info(
-                    dataSource = dataSource
+                    dataSource = dataSource,
+                    type = type
                 )
 
                 else -> ComponentStateModel.Unknown("")

@@ -1,13 +1,11 @@
 package com.tour.advisor.data.parser
 
-import android.content.Context
 import com.tour.advisor.logger.LoggerService
 import com.tour.advisor.presentation.dynamicUI.components.componentModule
 import com.tour.advisor.presentation.utility.assetloader.AssetLoader
 import kotlinx.serialization.json.Json
 
 class JsonAssetParser(
-    val context: Context,
     val logger: LoggerService,
     val assetLoader: AssetLoader,
     val json: Json = Json {
