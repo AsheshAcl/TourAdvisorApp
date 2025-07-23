@@ -12,12 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
 import com.tour.advisor.domain.models.InfoItemModel
+import com.tour.advisor.presentation.ui.constants.ComponentConstant
 import com.tour.advisor.presentation.ui.screens.HomeViewModel
+import com.tour.annotations.Component
 
 @Composable
+@Component(ComponentConstant.HORIZONTAL_LIST_COMPONENT_NAME)
 fun HorizontalScrollList(
-    component: ComponentStateModel.HorizontalList, homeViewModel: HomeViewModel? = null
+    componentModel: ComponentStateModel, homeViewModel: HomeViewModel? = null
 ) {
+    val component = componentModel as? ComponentStateModel.HorizontalList ?: return
     Column(modifier = Modifier.fillMaxWidth()) {
         TextComponent(
             modifier = Modifier.padding(start = 16.dp, bottom = 8.dp, top = 18.dp),

@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "TourAdvisorApp"
 include(":app")
- 
+include(":ksp-processor")
+include(":annotations")

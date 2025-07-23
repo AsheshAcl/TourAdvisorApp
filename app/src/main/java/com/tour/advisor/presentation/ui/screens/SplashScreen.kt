@@ -6,7 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.tour.advisor.navigation.Route
-import com.tour.advisor.presentation.ui.common.CommonScreenRender
+import com.tour.advisor.presentation.ui.common.DynamicScreen
 import kotlinx.coroutines.delay
 
 @Composable
@@ -20,7 +20,7 @@ fun SplashScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
 
     Column {
         splashScreenStateModel.value?.components?.let {
-            CommonScreenRender(
+            DynamicScreen(
                 components = it, homeViewModel = homeViewModel
             )
         }

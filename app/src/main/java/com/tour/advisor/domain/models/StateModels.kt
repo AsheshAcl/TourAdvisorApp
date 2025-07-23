@@ -12,26 +12,31 @@ data class ScreenModels(
 sealed class ComponentStateModel {
     val id: String = ""
     abstract val dataSource: String?
+    abstract val type: String?
 
     data class Splash(
         override val dataSource: String? = null,
-        val components: List<ComponentStateModel>
+        override val type: String? = null,
+        val components: List<ComponentStateModel>,
     ) : ComponentStateModel()
 
     data class TopBar(
         override val dataSource: String? = null,
+        override val type: String? = null,
         val title: String,
         val showBack: Boolean? = false
     ) : ComponentStateModel()
 
     data class Text(
         override val dataSource: String? = null,
+        override val type: String? = null,
         val value: String,
         val style: String?
     ) : ComponentStateModel()
 
     data class Button(
         override val dataSource: String? = null,
+        override val type: String? = null,
         val value: String,
         val style: String,
         val onClickRoute: String
@@ -39,11 +44,13 @@ sealed class ComponentStateModel {
 
     data class Image(
         override val dataSource: String? = null,
+        override val type: String? = null,
         val url: String? = null
     ) : ComponentStateModel()
 
     data class ImageLocal(
         override val dataSource: String? = null,
+        override val type: String? = null,
         val resource: String? = null
     ) : ComponentStateModel()
 
@@ -59,6 +66,7 @@ sealed class ComponentStateModel {
 
     data class HorizontalList(
         override val dataSource: String? = null,
+        override val type: String? = null,
         override val sectionHeader: String,
         override val sectionHeaderStyle: String,
         override val fields: List<ComponentStateModel>,
@@ -68,11 +76,13 @@ sealed class ComponentStateModel {
 
     data class LongCard(
         override val dataSource: String? = null,
+        override val type: String? = null,
         val value: String?
     ) : ComponentStateModel()
 
     data class VerticalList(
         override val dataSource: String? = null,
+        override val type: String? = null,
         override val sectionHeader: String,
         override val sectionHeaderStyle: String,
         override val fields: List<ComponentStateModel>,
@@ -82,16 +92,19 @@ sealed class ComponentStateModel {
 
     data class SmallCard(
         override val dataSource: String? = null,
+        override val type: String? = null,
         val value: String?
     ) : ComponentStateModel()
 
     data class ImageSlider(
         override val dataSource: String? = null,
+        override val type: String? = null,
         val urlList: List<String>? = emptyList(),
     ) : ComponentStateModel()
 
     data class Description(
         override val dataSource: String? = null,
+        override val type: String? = null,
         override val sectionHeader: String,
         override val sectionHeaderStyle: String,
         val value: String? = null
@@ -99,6 +112,7 @@ sealed class ComponentStateModel {
 
     data class Info(
         override val dataSource: String? = null,
+        override val type: String? = null,
         val infoTitle: String? = null,
         val leftTag: String? = null,
         val rightTag: String? = null
@@ -106,5 +120,6 @@ sealed class ComponentStateModel {
 
     data class Unknown(
         override val dataSource: String? = null,
+        override val type: String? = null,
     ) : ComponentStateModel()
 }

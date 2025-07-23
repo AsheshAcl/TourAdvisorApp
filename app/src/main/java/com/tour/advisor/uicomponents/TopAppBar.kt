@@ -13,6 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.presentation.ui.constants.ComponentConstant
+import com.tour.annotations.Component
+
+@Composable
+@Component(ComponentConstant.TOP_BAR_COMPONENT_NAME)
+fun TopAppBar(component: ComponentStateModel) {
+    val topAppBarComponent = component as? ComponentStateModel.TopBar ?: return
+    TopAppBar(topAppBarComponent, navigateBack = {})
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

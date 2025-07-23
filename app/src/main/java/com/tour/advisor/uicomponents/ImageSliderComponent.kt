@@ -23,10 +23,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.presentation.ui.constants.ComponentConstant
+import com.tour.annotations.Component
 import kotlinx.coroutines.delay
 
 @Composable
-fun ImageSliderComponent(component: ComponentStateModel.ImageSlider, autoSlideDuration: Long = 3000L) {
+@Component(ComponentConstant.IMAGE_SLIDER_COMPONENT_NAME)
+fun ImageSliderComponent(componentModel: ComponentStateModel, autoSlideDuration: Long = 3000L) {
+    val component = componentModel as? ComponentStateModel.ImageSlider ?: return
     if(component.urlList.isNullOrEmpty()) {
         return
     }
@@ -83,12 +87,12 @@ fun ImageSliderComponent(component: ComponentStateModel.ImageSlider, autoSlideDu
 @Preview
 @Composable
 private fun ImageSliderComponentPreview() {
-    ImageSliderComponent(component = ComponentStateModel.ImageSlider(
+    /*ImageSliderComponent(component = ComponentStateModel.ImageSlider(
         urlList = listOf(
             "https://ychef.files.bbci.co.uk/624x351/p08m61wb.jpg",
             "https://caminoincamachupicchu.org/cmingutd/wp-content/uploads/2021/06/machu-picchu-llama.jpg",
             "https://static.wixstatic.com/media/c8ce33_0b04ed009319494c902b146dc9baf028~mv2.jpg/v1/fit/w_1281,h_701,q_90,enc_avif,quality_auto/c8ce33_0b04ed009319494c902b146dc9baf028~mv2.jpg"
         )
-    ))
+    ))*/
 }
 

@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.tour.advisor.ComponentRegistry
 import com.tour.advisor.domain.models.ComponentStateModel
 import com.tour.advisor.presentation.ui.screens.HomeViewModel
 import com.tour.advisor.uicomponents.ButtonComponent
@@ -16,9 +17,7 @@ import com.tour.advisor.uicomponents.DescriptionComponent
 import com.tour.advisor.uicomponents.HorizontalScrollList
 import com.tour.advisor.uicomponents.ImageSliderComponent
 import com.tour.advisor.uicomponents.InfoComponent
-import com.tour.advisor.uicomponents.SplashComponent
 import com.tour.advisor.uicomponents.TextComponent
-import com.tour.advisor.uicomponents.TopAppBar
 import com.tour.advisor.uicomponents.VerticalScrollList
 
 @Composable
@@ -30,8 +29,8 @@ fun CommonScreenRender(
     Column(modifier = Modifier.fillMaxSize()) {
         components.forEach { component ->
             when (component) {
-                is ComponentStateModel.TopBar -> TopAppBar(component, homeViewModel::navigateBack)
-                is ComponentStateModel.Splash -> SplashComponent(component)
+//                is ComponentStateModel.TopBar -> TopAppBar(component, homeViewModel::navigateBack)
+//                is ComponentStateModel.Splash -> SplashComponent(component)
                 else -> {
 
                 }
@@ -66,4 +65,23 @@ fun CommonScreenRender(
             }
         }
     }
+}
+
+@Composable
+fun DynamicScreen(modifier: Modifier = Modifier,
+                      components: List<ComponentStateModel>,
+                      homeViewModel: HomeViewModel) {
+    LazyColumn(
+//            modifier = modifier.padding(10.dp), contentPadding = PaddingValues(bottom = 16.dp)
+    ) {
+        items(components) { component ->
+            RenderComponent(component)
+        }
+    }
+}
+
+@Composable
+fun RenderComponent(component: ComponentStateModel) {
+    val fqName = ComponentRegistry.components[component.type] ?: return
+    fqName.invoke(component)
 }

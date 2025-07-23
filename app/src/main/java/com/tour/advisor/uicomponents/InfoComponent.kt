@@ -16,10 +16,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.presentation.ui.constants.ComponentConstant
 import com.tour.advisor.presentation.ui.screens.HomeViewModel
+import com.tour.annotations.Component
 
 @Composable
-fun InfoComponent(component: ComponentStateModel.Info, homeViewModel: HomeViewModel? = null) {
+@Component(ComponentConstant.INFO_ROW_COMPONENT_NAME)
+fun InfoComponent(componentModel: ComponentStateModel, homeViewModel: HomeViewModel? = null) {
+    val component = componentModel as? ComponentStateModel.Info ?: return
     Column(Modifier.clickable {
         //Todo: Fix the clickable animation
         /*homeViewModel?.navigateToRoute(

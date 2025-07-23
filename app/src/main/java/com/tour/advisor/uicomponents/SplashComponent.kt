@@ -12,9 +12,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.presentation.ui.constants.ComponentConstant
+import com.tour.annotations.Component
 
 @Composable
-fun SplashComponent(component: ComponentStateModel.Splash) {
+@Component(ComponentConstant.SPLASH_COMPONENT_NAME)
+fun SplashComponent(componentModel: ComponentStateModel) {
+    val component = componentModel as? ComponentStateModel.Splash ?: return
     Box(modifier = Modifier.fillMaxSize()) {
         ImageComponent(
             Modifier.fillMaxSize(),

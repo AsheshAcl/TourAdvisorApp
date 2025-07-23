@@ -9,10 +9,20 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.presentation.ui.constants.ComponentConstant
 import com.tour.advisor.presentation.utility.UIUtils.Companion.getTypography
+import com.tour.annotations.Component
 
 @Composable
-fun ButtonComponent(modifier: Modifier = Modifier, component: ComponentStateModel.Button) {
+@Component(ComponentConstant.BUTTON_COMPONENT_NAME)
+fun ButtonComponentRenderer(component: ComponentStateModel) {
+    val buttonComponent = component as? ComponentStateModel.Text ?: return
+    ButtonComponent(Modifier, buttonComponent)
+}
+
+@Composable
+fun ButtonComponent(modifier: Modifier = Modifier, componentModel: ComponentStateModel) {
+    val component = componentModel as? ComponentStateModel.Button ?: return
     val backgroundColor = MaterialTheme.colorScheme.primary
 
     val contentColor = contentColorFor(backgroundColor)

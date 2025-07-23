@@ -18,10 +18,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.presentation.ui.constants.ComponentConstant
 import com.tour.advisor.presentation.ui.screens.HomeViewModel
+import com.tour.annotations.Component
 
 @Composable
-fun DescriptionComponent(component: ComponentStateModel.Description, homeViewModel: HomeViewModel? = null) {
+@Component(ComponentConstant.DESCRIPTION_COMPONENT_NAME)
+fun DescriptionComponent(componentModel: ComponentStateModel, homeViewModel: HomeViewModel? = null) {
+    val component = componentModel as? ComponentStateModel.Description ?: return
     Column {
         TextComponent(
             modifier = Modifier.padding(start = 16.dp, top = 18.dp),
@@ -82,9 +86,9 @@ fun DescriptionText(
 @Preview
 @Composable
 fun DescriptionPreview(modifier: Modifier = Modifier) {
-    DescriptionComponent(
+    /*DescriptionComponent(
         component = ComponentStateModel.Description(sectionHeader = "Description", sectionHeaderStyle = "titleMedium", value = "Machu Picchu - Ancient Incan citadel in Peru. Machu Picchu - Ancient Incan citadel in Peru" +
                 "Machu Picchu - Ancient Incan citadel in Peru, Machu Picchu - Ancient Incan citadel in Peru Machu Picchu - Ancient Incan citadel in Peru" +
                 "Machu Picchu - Ancient Incan citadel in Peru")
-    )
+    )*/
 }
