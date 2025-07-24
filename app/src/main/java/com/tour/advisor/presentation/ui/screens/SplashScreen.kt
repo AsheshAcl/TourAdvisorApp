@@ -14,7 +14,8 @@ fun SplashScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
     val splashScreenStateModel = homeViewModel.splashScreenStateModel.collectAsState()
     LaunchedEffect(Unit) {
 //        println("splashScreenConfig?.autoNavigateAfter ${splashScreenStateModel.value?.autoNavigateAfter}")
-        delay(6000)
+        homeViewModel.showHideLoading(isShow = true)
+        delay(3000)
         homeViewModel.navigateToRoute(Route.HOME_SCREEN.route, true, Route.SPLASH_SCREEN.route)
     }
 

@@ -85,7 +85,7 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
         navController.popBackStack()
     }
 
-    private fun showHideLoading(isShow: Boolean) {
+    fun showHideLoading(isShow: Boolean) {
         _uiState.value = _uiState.value.copy(isLoading = isShow)
     }
 

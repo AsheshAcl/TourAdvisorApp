@@ -34,12 +34,4 @@ fun PlaceDetailsScreen(modifier: Modifier, homeViewModel: HomeViewModel, navCont
             )
         }
     }
-
-    if (uiState.isLoading) {
-        LoadingComponent(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black.copy(alpha = 0.3f)),
-        )
-    }
 }

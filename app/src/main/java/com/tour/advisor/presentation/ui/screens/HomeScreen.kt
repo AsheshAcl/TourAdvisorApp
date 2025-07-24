@@ -16,7 +16,6 @@ import com.tour.advisor.uicomponents.LoadingComponent
 @Composable
 fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
     val homeScreenModel = homeViewModel.homeScreenConfig.collectAsState()
-    val uiState by homeViewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
         homeViewModel.getPlaces(screen = Screen.HOME_SCREEN)
@@ -30,11 +29,11 @@ fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
         }
     }
 
-    if (uiState.isLoading) {
+    /*if (uiState.isLoading) {
         LoadingComponent(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Black.copy(alpha = 0.3f)),
         )
-    }
+    }*/
 }
