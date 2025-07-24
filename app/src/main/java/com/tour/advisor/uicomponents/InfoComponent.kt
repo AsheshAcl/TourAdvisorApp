@@ -16,13 +16,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.presentation.dynamicUI.action.ComponentActionHandler
 import com.tour.advisor.presentation.ui.constants.ComponentConstant
 import com.tour.advisor.presentation.ui.screens.HomeViewModel
 import com.tour.annotations.Component
 
 @Composable
 @Component(ComponentConstant.INFO_ROW_COMPONENT_NAME)
-fun InfoComponent(componentModel: ComponentStateModel, homeViewModel: HomeViewModel? = null) {
+fun InfoComponent(componentModel: ComponentStateModel, actionHandler: ComponentActionHandler? = null, homeViewModel: HomeViewModel? = null) {
     val component = componentModel as? ComponentStateModel.Info ?: return
     Column(Modifier.clickable {
         //Todo: Fix the clickable animation
@@ -69,9 +70,12 @@ fun InfoComponent(componentModel: ComponentStateModel, homeViewModel: HomeViewMo
 @Preview
 @Composable
 private fun InfoComponentPreview() {
-    InfoComponent(ComponentStateModel.Info(
-        infoTitle = "Machu Picchu",
-        leftTag = "Beijing, China",
-        rightTag = "$30/Per person"
-    ))
+    InfoComponent(
+        ComponentStateModel.Info(
+            infoTitle = "Machu Picchu",
+            leftTag = "Beijing, China",
+            rightTag = "$30/Per person"
+        ),
+        actionHandler = null
+    )
 }

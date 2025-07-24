@@ -13,19 +13,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.presentation.dynamicUI.action.ComponentAction
+import com.tour.advisor.presentation.dynamicUI.action.ComponentActionHandler
 import com.tour.advisor.presentation.ui.constants.ComponentConstant
 import com.tour.annotations.Component
 
-@Composable
-@Component(ComponentConstant.TOP_BAR_COMPONENT_NAME)
-fun TopAppBar(component: ComponentStateModel) {
-    val topAppBarComponent = component as? ComponentStateModel.TopBar ?: return
-    TopAppBar(topAppBarComponent, navigateBack = {})
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(component: ComponentStateModel.TopBar, navigateBack: () -> Unit) {
+@Component(ComponentConstant.TOP_BAR_COMPONENT_NAME)
+fun TopAppBar(topAppBarComponent: ComponentStateModel, actionHandler: ComponentActionHandler) {
+    val component = topAppBarComponent as? ComponentStateModel.TopBar ?: return
     TopAppBar(
         windowInsets = WindowInsets(0), title = {
             TextComponent(
@@ -37,7 +34,7 @@ fun TopAppBar(component: ComponentStateModel.TopBar, navigateBack: () -> Unit) {
         navigationIcon = {
             if(component.showBack == true) {
                 IconButton(onClick = {
-                    navigateBack.invoke()
+                    actionHandler.onAction(ComponentAction.NavigateBack)
                 }) {
                     Icon(Icons.Default.ArrowBack, contentDescription = "Settings")
                 }

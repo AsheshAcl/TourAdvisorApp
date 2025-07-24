@@ -30,12 +30,12 @@ class DataMapper {
                 components = ui_components.map { it.toUiComponent() })
         }
 
-        fun UIComponent.toUiComponent(): ComponentStateModel {
+        private fun UIComponent.toUiComponent(): ComponentStateModel {
             return when (this) {
                 is TopAppBarComponent -> ComponentStateModel.TopBar(title = title, showBack = showBack, type = type)
                 is SplashComponent -> ComponentStateModel.Splash(components = fields.map { it.toUiComponent() }, type = type)
                 is TextComponent -> ComponentStateModel.Text(value = value, style = style, dataSource = dataSource, type = type)
-                is ButtonComponent -> ComponentStateModel.Button(value = value, style = style, onClickRoute = onClickRoute, type = type)
+                is ButtonComponent -> ComponentStateModel.Button(value = value, style = style, action = action, type = type)
                 is ImageComponent -> ComponentStateModel.Image(
                     url = resource, dataSource = dataSource, type = type
                 )

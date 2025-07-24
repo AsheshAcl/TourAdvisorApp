@@ -273,10 +273,10 @@
       {
         "id": "place_save_button",
         "componentType": "button",
-        "value": "Book Now",
+        "value": "Save place",
         "type": "button",
-        "style": "small",
-        "onClickRoute": "save_place"
+        "style": "bodyLarge",
+        "action": "save_place"
       }
     ]
   }

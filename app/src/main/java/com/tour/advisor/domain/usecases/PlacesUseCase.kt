@@ -1,6 +1,5 @@
 package com.tour.advisor.domain.usecases
 
-import com.tour.advisor.data.places.model.PlaceModel
 import com.tour.advisor.domain.mapper.DataMapper.Companion.toComponentItem
 import com.tour.advisor.domain.models.InfoItemModel
 import com.tour.advisor.domain.places.PlaceRepository

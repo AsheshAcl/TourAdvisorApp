@@ -18,13 +18,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.presentation.dynamicUI.action.ComponentActionHandler
 import com.tour.advisor.presentation.ui.constants.ComponentConstant
 import com.tour.advisor.presentation.ui.screens.HomeViewModel
 import com.tour.annotations.Component
 
 @Composable
 @Component(ComponentConstant.DESCRIPTION_COMPONENT_NAME)
-fun DescriptionComponent(componentModel: ComponentStateModel, homeViewModel: HomeViewModel? = null) {
+fun DescriptionComponent(componentModel: ComponentStateModel, actionHandler: ComponentActionHandler, homeViewModel: HomeViewModel? = null) {
     val component = componentModel as? ComponentStateModel.Description ?: return
     Column {
         TextComponent(

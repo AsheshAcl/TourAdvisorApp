@@ -1,7 +1,6 @@
 package com.tour.advisor.data.parser
 
 import com.tour.advisor.logger.LoggerService
-import com.tour.advisor.presentation.dynamicUI.components.componentModule
 import com.tour.advisor.presentation.utility.assetloader.AssetLoader
 import kotlinx.serialization.json.Json
 
@@ -11,7 +10,6 @@ class JsonAssetParser(
     val json: Json = Json {
         ignoreUnknownKeys = true
         classDiscriminator = "componentType"
-        serializersModule = componentModule
     }
 ) {
 

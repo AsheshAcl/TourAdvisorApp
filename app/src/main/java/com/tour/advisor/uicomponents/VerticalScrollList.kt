@@ -14,13 +14,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
 import com.tour.advisor.domain.models.InfoItemModel
+import com.tour.advisor.presentation.dynamicUI.action.ComponentAction
+import com.tour.advisor.presentation.dynamicUI.action.ComponentActionHandler
 import com.tour.advisor.presentation.ui.constants.ComponentConstant
 import com.tour.advisor.presentation.ui.screens.HomeViewModel
 import com.tour.annotations.Component
 
 @Composable
 @Component(ComponentConstant.VERTICAL_LIST_COMPONENT_NAME)
-fun VerticalScrollList(componentModel: ComponentStateModel, homeViewModel: HomeViewModel? = null) {
+fun VerticalScrollList(componentModel: ComponentStateModel, actionHandler: ComponentActionHandler,
+                       homeViewModel: HomeViewModel? = null) {
     val component = componentModel as? ComponentStateModel.VerticalList ?: return
     Column(modifier = Modifier.fillMaxWidth()) {
         TextComponent(
@@ -39,9 +42,11 @@ fun VerticalScrollList(componentModel: ComponentStateModel, homeViewModel: HomeV
                         .fillMaxWidth()
                         .clickable {
                             //Todo: Fix the clickable animation
-                            homeViewModel?.navigateToRoute(
-                                route = component.onClickRoute,
-                                argument = "/${componentData.title}"
+                            actionHandler.onAction(
+                                componentAction = ComponentAction.NavigateToRoute(
+                                    route = component.onClickRoute,
+                                    param = "/${componentData.title}"
+                                )
                             )
                         }) {
                         SmallCardImage(ComponentStateModel.Image(url = componentData.imageUrl))

@@ -23,13 +23,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.presentation.dynamicUI.action.ComponentActionHandler
 import com.tour.advisor.presentation.ui.constants.ComponentConstant
 import com.tour.annotations.Component
 import kotlinx.coroutines.delay
 
 @Composable
 @Component(ComponentConstant.IMAGE_SLIDER_COMPONENT_NAME)
-fun ImageSliderComponent(componentModel: ComponentStateModel, autoSlideDuration: Long = 3000L) {
+fun ImageSliderComponent(componentModel: ComponentStateModel, actionHandler: ComponentActionHandler, autoSlideDuration: Long = 3000L) {
     val component = componentModel as? ComponentStateModel.ImageSlider ?: return
     if(component.urlList.isNullOrEmpty()) {
         return

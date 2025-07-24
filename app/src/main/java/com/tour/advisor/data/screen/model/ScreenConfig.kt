@@ -81,7 +81,7 @@ data class ButtonComponent(
     override val type: String,
     val value: String,
     val style: String,
-    val onClickRoute: String
+    val action: String? = null
 ) : UIComponent()
 
 @Serializable
@@ -104,7 +104,7 @@ data class DescriptionComponent(
     override val id: String,
     override val type: String,
     val section_header: String,
-    val section_header_style: String,
+    val section_header_style: String
 ) : UIComponent()
 
 @Serializable

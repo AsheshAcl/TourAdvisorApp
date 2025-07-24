@@ -11,77 +11,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.ComponentRegistry
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.presentation.ui.constants.ComponentConstant
 import com.tour.advisor.presentation.ui.screens.HomeViewModel
-import com.tour.advisor.uicomponents.ButtonComponent
-import com.tour.advisor.uicomponents.DescriptionComponent
-import com.tour.advisor.uicomponents.HorizontalScrollList
-import com.tour.advisor.uicomponents.ImageSliderComponent
-import com.tour.advisor.uicomponents.InfoComponent
-import com.tour.advisor.uicomponents.TextComponent
-import com.tour.advisor.uicomponents.VerticalScrollList
-
-@Composable
-fun CommonScreenRender(
-    modifier: Modifier = Modifier,
-    components: List<ComponentStateModel>,
-    homeViewModel: HomeViewModel
-) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        components.forEach { component ->
-            when (component) {
-//                is ComponentStateModel.TopBar -> TopAppBar(component, homeViewModel::navigateBack)
-//                is ComponentStateModel.Splash -> SplashComponent(component)
-                else -> {
-
-                }
-            }
-        }
-        LazyColumn(
-//            modifier = modifier.padding(10.dp), contentPadding = PaddingValues(bottom = 16.dp)
-        ) {
-            items(components) { component ->
-                when (component) {
-                    is ComponentStateModel.Text -> TextComponent(Modifier.padding(8.dp), component)
-                    is ComponentStateModel.Button -> ButtonComponent(Modifier, component)
-
-                    is ComponentStateModel.HorizontalList -> HorizontalScrollList(
-                        component, homeViewModel = homeViewModel
-                    )
-
-                    is ComponentStateModel.VerticalList -> VerticalScrollList(
-                        component, homeViewModel = homeViewModel
-                    )
-
-                    is ComponentStateModel.Info -> InfoComponent(component)
-                    is ComponentStateModel.ImageSlider -> ImageSliderComponent(component)
-                    is ComponentStateModel.Description -> DescriptionComponent(component)
-
-                    /*is ComponentStateModel.LongCard -> LongCardImage(ComponentStateModel.Image())
-                    is ComponentStateModel.SmallCard -> SmallCardImage(ComponentStateModel.Image())*/
-                    else -> {
-
-                    }
-                }
-            }
-        }
-    }
-}
 
 @Composable
 fun DynamicScreen(modifier: Modifier = Modifier,
                       components: List<ComponentStateModel>,
                       homeViewModel: HomeViewModel) {
-    LazyColumn(
-//            modifier = modifier.padding(10.dp), contentPadding = PaddingValues(bottom = 16.dp)
-    ) {
-        items(components) { component ->
-            RenderComponent(component)
+    Column(modifier = Modifier.fillMaxSize()) {
+        val fixedComponents = components.filter { it.type == ComponentConstant.TOP_BAR_COMPONENT_NAME ||
+                it.type == ComponentConstant.SPLASH_COMPONENT_NAME}
+        fixedComponents.forEach {
+            RenderComponent(it, homeViewModel)
+        }
+
+        val bodyComponents = components.filterNot { it.type == ComponentConstant.TOP_BAR_COMPONENT_NAME ||
+                it.type == ComponentConstant.SPLASH_COMPONENT_NAME }
+        LazyColumn(
+            modifier = modifier.padding(10.dp), contentPadding = PaddingValues(bottom = 16.dp)
+        ) {
+            items(bodyComponents) { component ->
+                RenderComponent(component, homeViewModel)
+            }
         }
     }
 }
 
 @Composable
-fun RenderComponent(component: ComponentStateModel) {
+fun RenderComponent(component: ComponentStateModel, homeViewModel: HomeViewModel) {
     val fqName = ComponentRegistry.components[component.type] ?: return
-    fqName.invoke(component)
+    fqName.invoke(component, homeViewModel)
 }

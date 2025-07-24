@@ -8,7 +8,7 @@ import kotlinx.serialization.json.Json
 
 object ScreenMapper {
     val json = Json {
-        classDiscriminator = "componentType" // <- this avoids conflict with your actual `type` field
+        classDiscriminator = "componentType"
         ignoreUnknownKeys = true
     }
     fun fromEntity(entity: ScreenEntity): ScreenConfig {

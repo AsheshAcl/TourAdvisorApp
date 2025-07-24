@@ -3,7 +3,6 @@ package com.tour.advisor.presentation.ui.screens
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.tour.advisor.data.screen.model.ScreenConfig
 import com.tour.advisor.domain.mapper.DataMapper.Companion.toUi
 import com.tour.advisor.domain.models.ComponentStateModel
 import com.tour.advisor.domain.models.InfoItemModel
@@ -12,6 +11,8 @@ import com.tour.advisor.domain.result.Response
 import com.tour.advisor.domain.usecases.PlacesUseCase
 import com.tour.advisor.domain.usecases.ScreenConfigUseCase
 import com.tour.advisor.logger.LoggerService
+import com.tour.advisor.presentation.dynamicUI.action.ComponentAction
+import com.tour.advisor.presentation.dynamicUI.action.ComponentActionHandler
 import com.tour.advisor.presentation.ui.constants.Screen
 import com.tour.advisor.presentation.ui.state.UIState
 import kotlinx.coroutines.delay
@@ -25,37 +26,44 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
                     private val placeUseCase: PlacesUseCase,
-                    private val logger: LoggerService): ViewModel() {
+                    private val logger: LoggerService): ViewModel(), ComponentActionHandler {
+
+    init {
+        viewModelScope.launch {
+            val screens = getScreenConfigUseCase()
+            val screenConfigs = screens.map { it.toUi() }
+            _screenStateModels.emit(screenConfigs)
+//            _screenConfigStateModels.emit(screens)
+        }
+    }
+
     private val TAG: String = this::class.java.simpleName
 
     private val _uiState = MutableStateFlow(UIState())
     val uiState: StateFlow<UIState> = _uiState.asStateFlow()
 
-    private val _screenConfigStateModels = MutableStateFlow<List<ScreenConfig>>(emptyList())
-    val screenConfigStateModels: StateFlow<List<ScreenConfig>> = _screenConfigStateModels
-
     private val _screenStateModels = MutableStateFlow<List<ScreenModels>>(emptyList())
-    val screenStateModels: StateFlow<List<ScreenModels>> = _screenStateModels
+    private val screenStateModels: StateFlow<List<ScreenModels>> = _screenStateModels
 
-    private val _placesStateModels = MutableStateFlow<List<InfoItemModel>>(emptyList())
-    val placesStateModels: StateFlow<List<InfoItemModel>> = _placesStateModels
+    /*private val _placesStateModels = MutableStateFlow<List<InfoItemModel>>(emptyList())
+    val placesStateModels: StateFlow<List<InfoItemModel>> = _placesStateModels*/
 
-    private val _placeDetailsStateModels: MutableStateFlow<InfoItemModel?> = MutableStateFlow<InfoItemModel?>(null)
-    val placeDetailsStateModels: StateFlow<InfoItemModel?> = _placeDetailsStateModels
+/*    private val _placeDetailsStateModels: MutableStateFlow<InfoItemModel?> = MutableStateFlow<InfoItemModel?>(null)
+    val placeDetailsStateModels: StateFlow<InfoItemModel?> = _placeDetailsStateModels*/
 
-    val splashScreenStateModel: StateFlow<ScreenModels?> = _screenStateModels
+    val splashScreenStateModel: StateFlow<ScreenModels?> = screenStateModels
         .map { it.find { model -> model.name == Screen.SPLASH_SCREEN } }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
-    val onboardingScreenConfig: StateFlow<ScreenModels?> = _screenStateModels
+    val onboardingScreenConfig: StateFlow<ScreenModels?> = screenStateModels
         .map { it.find { model -> model.name == Screen.ONBOARDING_SCREEN } }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
-    val homeScreenConfig: StateFlow<ScreenModels?> = _screenStateModels
+    val homeScreenConfig: StateFlow<ScreenModels?> = screenStateModels
         .map { it.find { model -> model.name == Screen.HOME_SCREEN } }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
-    val detailsScreenConfig: StateFlow<ScreenModels?> = _screenStateModels
+    val detailsScreenConfig: StateFlow<ScreenModels?> = screenStateModels
         .map { it.find { model -> model.name == Screen.PLACE_DETAIL_SCREEN } }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
@@ -75,15 +83,6 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
 
     fun navigateBack() {
         navController.popBackStack()
-    }
-
-    init {
-        viewModelScope.launch {
-            val screens = getScreenConfigUseCase()
-            val screenConfigs = screens.map { it.toUi() }
-            _screenStateModels.emit(screenConfigs)
-//            _screenConfigStateModels.emit(screens)
-        }
     }
 
     private fun showHideLoading(isShow: Boolean) {
@@ -108,7 +107,7 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
         viewModelScope.launch {
             when (val result = placeUseCase.getPlaces()) {
                 is Response.Success -> {
-                    _placesStateModels.emit(result.data)
+//                    _placesStateModels.emit(result.data)
                     updateComponentList(screen, "nearby_places", result.data)
                     delay(2000)
                     showHideLoading(isShow = false)
@@ -171,7 +170,7 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
             when (val result = placeUseCase.getPlaceDetails(name)) {
                 is Response.Success -> {
                     logger.logInfo(TAG, "Api response - getPlaceDetails ${result.data}")
-                    _placeDetailsStateModels.emit(result.data)
+//                    _placeDetailsStateModels.emit(result.data)
                     updatePlaceDetailsComponent(screen, "additional_images", result.data)
                     updatePlaceDetailsComponent(screen, "placeDescription", result.data)
                     updatePlaceDetailsComponent(screen, "place_info_row", result.data)
@@ -188,7 +187,7 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
         }
     }
 
-    private suspend fun updatePlaceDetailsComponent(
+    private fun updatePlaceDetailsComponent(
         screen: Screen,
         componentId: String,
         newItem: InfoItemModel
@@ -225,5 +224,28 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
             }
         }
 
+    }
+
+    override fun onAction(componentAction: ComponentAction) {
+        when (componentAction) {
+            is ComponentAction.FetchData -> {
+
+            }
+            is ComponentAction.NavigateToRoute -> {
+                navigateToRoute(
+                    route = componentAction.route, argument = componentAction.param
+                )
+            }
+            is ComponentAction.NavigateBack -> {
+                navigateBack()
+            }
+            is ComponentAction.ButtonAction -> {
+                when(componentAction.action) {
+                    "save_place" -> {
+
+                    }
+                }
+            }
+        }
     }
 }

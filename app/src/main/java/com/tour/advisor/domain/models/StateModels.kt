@@ -39,7 +39,7 @@ sealed class ComponentStateModel {
         override val type: String? = null,
         val value: String,
         val style: String,
-        val onClickRoute: String
+        val action: String? = null
     ) : ComponentStateModel()
 
     data class Image(

@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
 import com.tour.advisor.domain.models.InfoItemModel
+import com.tour.advisor.presentation.dynamicUI.action.ComponentAction
+import com.tour.advisor.presentation.dynamicUI.action.ComponentActionHandler
 import com.tour.advisor.presentation.ui.constants.ComponentConstant
 import com.tour.advisor.presentation.ui.screens.HomeViewModel
 import com.tour.annotations.Component
@@ -19,7 +21,8 @@ import com.tour.annotations.Component
 @Composable
 @Component(ComponentConstant.HORIZONTAL_LIST_COMPONENT_NAME)
 fun HorizontalScrollList(
-    componentModel: ComponentStateModel, homeViewModel: HomeViewModel? = null
+    componentModel: ComponentStateModel, actionHandler: ComponentActionHandler? = null,
+    homeViewModel: HomeViewModel? = null
 ) {
     val component = componentModel as? ComponentStateModel.HorizontalList ?: return
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -37,8 +40,11 @@ fun HorizontalScrollList(
                 if (componentData is InfoItemModel) {
                     Column(Modifier.clickable {
                         //Todo: Fix the clickable animation
-                        homeViewModel?.navigateToRoute(
-                            route = component.onClickRoute, argument = "/${componentData.title}"
+                        actionHandler?.onAction(
+                            componentAction = ComponentAction.NavigateToRoute(
+                                route = component.onClickRoute,
+                                param = "/${componentData.title}"
+                            )
                         )
                     }) {
                         LongCardImage(ComponentStateModel.Image(url = componentData.imageUrl))

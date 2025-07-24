@@ -1,6 +1,7 @@
 package com.tour.advisor.presentation.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -11,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import com.tour.advisor.logger.LoggerService
 import com.tour.advisor.presentation.ui.constants.Screen
-import com.tour.advisor.presentation.ui.common.CommonScreenRender
+import com.tour.advisor.presentation.ui.common.DynamicScreen
 import com.tour.advisor.uicomponents.LoadingComponent
 import org.koin.compose.koinInject
 
@@ -26,11 +27,12 @@ fun PlaceDetailsScreen(modifier: Modifier, homeViewModel: HomeViewModel, navCont
         homeViewModel.callDetailsApi(Screen.PLACE_DETAIL_SCREEN, placeName)
     }
 
-    placeDetailsScreenModel.value?.components?.let { components ->
-        CommonScreenRender(
-            components = components,
-            homeViewModel = homeViewModel
-        )
+    Column {
+        placeDetailsScreenModel.value?.components?.let {
+            DynamicScreen(
+                components = it, homeViewModel = homeViewModel
+            )
+        }
     }
 
     if (uiState.isLoading) {

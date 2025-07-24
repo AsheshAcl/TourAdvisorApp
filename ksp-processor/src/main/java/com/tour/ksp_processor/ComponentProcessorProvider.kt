@@ -18,8 +18,7 @@ class ComponentProcessorProvider : SymbolProcessorProvider {
 }
 
 class ComponentProcessor(
-    private val codeGenerator: CodeGenerator,
-    private val logger: KSPLogger
+    private val codeGenerator: CodeGenerator, private val logger: KSPLogger
 ) : SymbolProcessor {
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
@@ -38,9 +37,7 @@ class ComponentProcessor(
         }
         try {
             val file = codeGenerator.createNewFile(
-                Dependencies(true),
-                "com.tour.advisor",
-                "ComponentRegistry"
+                Dependencies(true), "com.tour.advisor", "ComponentRegistry"
             )
 
             file.bufferedWriter().use { writer ->
@@ -48,26 +45,28 @@ class ComponentProcessor(
                 writer.appendLine()
                 writer.appendLine("import androidx.compose.runtime.Composable")
                 writer.appendLine("import com.tour.advisor.domain.models.ComponentStateModel")
+                writer.appendLine("import com.tour.advisor.presentation.dynamicUI.action.ComponentActionHandler")
 
-                // Import each discovered function
                 map.forEach { (_, fqFunctionName) ->
-                    val importPath = fqFunctionName.substringBeforeLast(".*")
-                    writer.appendLine("import $importPath")
+                    val functionImport =
+                        fqFunctionName.substringBeforeLast(".") + "." + fqFunctionName.substringAfterLast(
+                            "."
+                        )
+                    writer.appendLine("import $functionImport")
                 }
 
                 writer.appendLine()
                 writer.appendLine("object ComponentRegistry {")
-                writer.appendLine("  val components: Map<String, @Composable (ComponentStateModel) -> Unit> = mapOf(")
+                writer.appendLine("  val components: Map<String, @Composable (ComponentStateModel, ComponentActionHandler) -> Unit> = mapOf(")
 
                 map.forEach { (type, fqFunctionName) ->
                     val functionName = fqFunctionName.substringAfterLast(".")
-                    writer.appendLine("    \"$type\" to { component -> $functionName(component) },")
+                    writer.appendLine("    \"$type\" to { component, handler -> $functionName(component, handler) },")
                 }
 
                 writer.appendLine("  )")
                 writer.appendLine("}")
             }
-
         } catch (e: Exception) {
             logger.warn("File already exist: ${e.message}")
         }
