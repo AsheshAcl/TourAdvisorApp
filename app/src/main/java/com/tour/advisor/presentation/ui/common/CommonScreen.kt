@@ -21,19 +21,21 @@ import com.tour.advisor.presentation.ui.screens.HomeViewModel
 import com.tour.advisor.uicomponents.LoadingComponent
 
 @Composable
-fun DynamicScreen(modifier: Modifier = Modifier,
-                      components: List<ComponentStateModel>,
-                      homeViewModel: HomeViewModel) {
+fun CommonScreen(modifier: Modifier = Modifier,
+                 components: List<ComponentStateModel>,
+                 homeViewModel: HomeViewModel) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column {
             val fixedComponents = components.filter { it.type == ComponentConstant.TOP_BAR_COMPONENT_NAME ||
-                    it.type == ComponentConstant.SPLASH_COMPONENT_NAME}
+                    it.type == ComponentConstant.SPLASH_COMPONENT_NAME ||
+                    it.type == ComponentConstant.ONBOARDING_COMPONENT_NAME}
             fixedComponents.forEach {
                 RenderComponent(it, homeViewModel)
             }
 
             val bodyComponents = components.filterNot { it.type == ComponentConstant.TOP_BAR_COMPONENT_NAME ||
-                    it.type == ComponentConstant.SPLASH_COMPONENT_NAME }
+                    it.type == ComponentConstant.SPLASH_COMPONENT_NAME ||
+                    it.type == ComponentConstant.ONBOARDING_COMPONENT_NAME}
             LazyColumn(
                 modifier = modifier.padding(10.dp), contentPadding = PaddingValues(bottom = 16.dp)
             ) {

@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.tour.advisor.presentation.ui.screens.HomeScreen
 import com.tour.advisor.presentation.ui.screens.HomeViewModel
+import com.tour.advisor.presentation.ui.screens.OnBoardingScreen
 import com.tour.advisor.presentation.ui.screens.PlaceDetailsScreen
 import com.tour.advisor.presentation.ui.screens.SplashScreen
 
@@ -19,6 +20,11 @@ fun AppNavigation(
     NavHost(navController = navController, startDestination = Route.SPLASH_SCREEN.route) {
         composable(Route.SPLASH_SCREEN.route) {
             SplashScreen(modifier = Modifier, homeViewModel)
+        }
+        composable(Route.ONBOARDING_SCREEN.route) {
+            OnBoardingScreen(
+                modifier = Modifier, homeViewModel = homeViewModel
+            )
         }
         composable(Route.HOME_SCREEN.route) {
             HomeScreen(

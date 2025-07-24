@@ -17,6 +17,8 @@ class UIUtils {
         val drawableMap = mapOf(
             "ic_app_icon" to R.drawable.ic_app_icon,
             "ic_travel_splash" to R.drawable.ic_travel_splash,
+            "ic_onboarding_1" to R.drawable.ic_onboarding_1,
+            "ic_onboarding_2" to R.drawable.ic_onboarding_2
         )
 
         fun getDrawableIdFromMap(name: String): Int? = drawableMap[name]

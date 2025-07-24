@@ -46,8 +46,17 @@ data class SplashComponent(
 data class OnboardingComponent(
     override val id: String,
     override val type: String,
-    val fields: List<UIComponent> = emptyList()
+    val items: List<OnboardingItem> = emptyList()
 ) : UIComponent()
+
+@Serializable
+@SerialName("onboarding_item")
+data class OnboardingItem(
+    val title: String? = null,
+    val description: String? = null,
+    val buttonText: String? = null,
+    val image: String? = null
+)
 
 @Serializable
 @SerialName("text")
@@ -159,11 +168,3 @@ data class SingleRatingComponent(
     override val type: String,
     val resource: String? = null
 ) : UIComponent()
-
-@Serializable
-data class InfoRowItem(
-    val id: String,
-    val type: String,
-    val style: String? = null,
-    val resource: String? = null
-)

@@ -20,6 +20,20 @@ sealed class ComponentStateModel {
         val components: List<ComponentStateModel>,
     ) : ComponentStateModel()
 
+    data class Onboarding(
+        override val dataSource: String? = null,
+        override val type: String? = null,
+        val items: List<OnboardingItemState>,
+    ) : ComponentStateModel()
+
+    data class OnboardingItemState(
+        val dataSource: String? = null,
+        val title: String? = null,
+        val description: String? = null,
+        val buttonText: String? = null,
+        val image: String? = null
+    )
+
     data class TopBar(
         override val dataSource: String? = null,
         override val type: String? = null,

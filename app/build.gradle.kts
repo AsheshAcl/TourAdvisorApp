@@ -72,6 +72,8 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation("com.google.devtools.ksp:symbol-processing-api:2.2.0-2.0.2")
     implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.0")
+    implementation("com.google.accompanist:accompanist-pager:0.34.0") // or latest
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.34.0")
     // Hilt
 /*    implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)*/

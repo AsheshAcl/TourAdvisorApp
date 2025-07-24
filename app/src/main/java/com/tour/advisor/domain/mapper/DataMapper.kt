@@ -9,6 +9,8 @@ import com.tour.advisor.data.screen.model.ImageComponent
 import com.tour.advisor.data.screen.model.ImageSliderComponent
 import com.tour.advisor.data.screen.model.InfoRowComponent
 import com.tour.advisor.data.screen.model.LongCardImageComponent
+import com.tour.advisor.data.screen.model.OnboardingComponent
+import com.tour.advisor.data.screen.model.OnboardingItem
 import com.tour.advisor.data.screen.model.ScreenConfig
 import com.tour.advisor.data.screen.model.SmallCardImageComponent
 import com.tour.advisor.data.screen.model.SplashComponent
@@ -33,6 +35,7 @@ class DataMapper {
         private fun UIComponent.toUiComponent(): ComponentStateModel {
             return when (this) {
                 is TopAppBarComponent -> ComponentStateModel.TopBar(title = title, showBack = showBack, type = type)
+                is OnboardingComponent -> ComponentStateModel.Onboarding(items = items.map { it.toUiComponent() }, type = type)
                 is SplashComponent -> ComponentStateModel.Splash(components = fields.map { it.toUiComponent() }, type = type)
                 is TextComponent -> ComponentStateModel.Text(value = value, style = style, dataSource = dataSource, type = type)
                 is ButtonComponent -> ComponentStateModel.Button(value = value, style = style, action = action, type = type)
@@ -89,6 +92,15 @@ class DataMapper {
 
                 else -> ComponentStateModel.Unknown("")
             }
+        }
+
+        private fun OnboardingItem.toUiComponent(): ComponentStateModel.OnboardingItemState {
+            return ComponentStateModel.OnboardingItemState(
+                title = title,
+                description = description,
+                buttonText = buttonText,
+                image = image
+            )
         }
 
         fun PlaceEntity.toDomain(): PlaceModel = PlaceModel(

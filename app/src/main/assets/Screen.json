@@ -41,38 +41,24 @@
         "id": "onboarding",
         "componentType": "onboarding",
         "type": "onboarding",
-        "fields": [
+        "items": [
           {
-            "id": "onboarding_title",
-            "componentType": "text",
-            "type": "text",
-            "value": "Welcome to Tour Advisor!",
-            "style": "titleLarge"
+            "title": "Welcome to Tour Advisor!",
+            "buttonText": "Start",
+            "image": ""
           },
           {
-            "id": "onboarding_description",
-            "componentType": "text",
-            "type": "text",
-            "value": "Plan your vacation smartly with our guided suggestions based on season and weather.",
-            "style": "bodyMedium"
+            "title": "Plan your trip with ease and confidence",
+            "description": "Build your itinerary in minutes, not hours",
+            "buttonText": "Next",
+            "image": "ic_onboarding_1"
           },
           {
-            "id": "onboarding_slider",
-            "componentType": "image_slider",
-            "type": "image_slider",
-            "resources": [
-              "ic_onboard1",
-              "ic_onboard2",
-              "ic_onboard3"
-            ]
-          },
-          {
-            "id": "onboarding_button",
-            "componentType": "button",
-            "type": "button",
-            "value": "Get Started",
-            "style": "large",
-            "onClickRoute": "home"
+            "title": "Find perfect destination for every mood",
+            "description": "Explore you've never seen before & Discover just for you",
+            "buttonText": "Get Started",
+            "onClickRoute": "HOME_SCREEN",
+            "image": "ic_onboarding_2"
           }
         ]
       }

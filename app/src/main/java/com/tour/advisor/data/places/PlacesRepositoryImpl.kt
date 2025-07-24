@@ -12,20 +12,26 @@ class PlacesRepositoryImpl(private val remoteSource: DataRemoteDataSource,
 ): PlaceRepository {
     override suspend fun getPlaces(): Response<List<PlaceModel>> {
         return try {
-            val remoteScreens = remoteSource.getRemotePlacesData()
-
-            dao.insertPlace(remoteScreens.map {
-                PlaceEntity(
-                    placeName = it.placeName,
-                    placeImage = it.placeImage,
-                    placeDescription = it.placeDescription,
-                    placeCost = it.placeCost,
-                    placeLocation = it.placeLocation,
-                    placeRating = it.placeRating,
-                    additionalImages = it.additionalImages
-                )
-            })
-            Response.Success(remoteScreens)
+            val placeData = remoteSource.getRemotePlacesData()
+            if (placeData.isNotEmpty()) {
+                dao.insertPlace(placeData.map {
+                    PlaceEntity(
+                        placeName = it.placeName,
+                        placeImage = it.placeImage,
+                        placeDescription = it.placeDescription,
+                        placeCost = it.placeCost,
+                        placeLocation = it.placeLocation,
+                        placeRating = it.placeRating,
+                        additionalImages = it.additionalImages
+                    )
+                })
+                Response.Success(placeData)
+            } else {
+                logger.logError("PlacesRepositoryImpl", "Places Data were empty or null. Using fallback from DB.")
+                val localEntities = dao.getPlaces()
+                val localModels = localEntities.toDomain()
+                Response.Success(localModels)
+            }
         } catch (e: Exception) {
             logger.logError("PlacesRepositoryImpl", "Using fallback from DB: ${e.message}")
             return try {

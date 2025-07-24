@@ -233,7 +233,10 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
             }
             is ComponentAction.NavigateToRoute -> {
                 navigateToRoute(
-                    route = componentAction.route, argument = componentAction.param
+                    route = componentAction.route,
+                    argument = componentAction.param,
+                    isPopBack = componentAction.isPopBack,
+                    popupBackRoute = componentAction.popupBackRoute
                 )
             }
             is ComponentAction.NavigateBack -> {
