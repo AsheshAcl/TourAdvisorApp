@@ -6,21 +6,20 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.tour.advisor.presentation.ui.constants.Screen
-import com.tour.advisor.presentation.ui.common.CommonScreen
 
 @Composable
 fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
     val homeScreenModel = homeViewModel.homeScreenConfig.collectAsState()
 
     LaunchedEffect(Unit) {
-        homeViewModel.getPlaces(screen = Screen.HOME_SCREEN)
+//        homeViewModel.getPlaces(screen = Screen.HOME_SCREEN)
     }
 
     Column {
         homeScreenModel.value?.components?.let {
-            CommonScreen(
+            /*CommonScreen(
                 components = it, homeViewModel = homeViewModel
-            )
+            )*/
         }
     }
 }

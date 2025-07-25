@@ -3,6 +3,7 @@
     "screen_name": "SPLASH_SCREEN",
     "screen_title": "",
     "route": "SPLASH_SCREEN",
+    "next_screen_route": "ONBOARDING_SCREEN",
     "ui_components": [
       {
         "id": "splash",
@@ -36,6 +37,7 @@
     "screen_name": "ONBOARDING_SCREEN",
     "screen_title": "",
     "route": "ONBOARDING_SCREEN",
+    "next_screen_route": "HOME_SCREEN",
     "ui_components": [
       {
         "id": "onboarding",
@@ -68,6 +70,7 @@
     "screen_name": "HOME_SCREEN",
     "screen_title": "Explore",
     "route": "HOME_SCREEN",
+    "next_screen_route": "DETAILS_SCREEN",
     "ui_components": [
       {
         "id": "top_bar",
@@ -226,7 +229,11 @@
   {
     "screen_name": "PLACE_DETAIL_SCREEN",
     "screen_title": "Place details",
-    "route": "DETAILS_SCREEN",
+    "route": "DETAILS_SCREEN/{placeName}",
+    "arguments": [
+      "placeName"
+    ],
+    "next_screen_route": "",
     "ui_components": [
       {
         "id": "top_bar",

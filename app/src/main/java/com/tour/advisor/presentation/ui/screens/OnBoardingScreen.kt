@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.tour.advisor.logger.LoggerService
-import com.tour.advisor.presentation.ui.common.CommonScreen
 import org.koin.compose.koinInject
 
 @Composable
@@ -15,9 +14,9 @@ fun OnBoardingScreen(modifier: Modifier, homeViewModel: HomeViewModel? = null) {
 
     Column {
         onboardingScreen?.value?.components?.let {
-            CommonScreen(
+            /*CommonScreen(
                 components = it, homeViewModel = homeViewModel
-            )
+            )*/
         }
     }
 }

@@ -32,6 +32,7 @@ class HomeViewModelTest: TestCase() {
                 screen_name = Screen.HOME_SCREEN.name,
                 screen_title = "Home screen",
                 route = Screen.HOME_SCREEN.name,
+                next_screen_route = "HOME_SCREEN",
                 ui_components = emptyList()
             )
         )

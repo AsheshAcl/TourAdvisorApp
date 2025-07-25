@@ -29,6 +29,9 @@ class DataMapper {
             return ScreenModels(name = Screen.fromValue(screen_name),
                 title = screen_title,
                 autoNavigateAfter = auto_navigate_after,
+                route = route,
+                arguments = arguments,
+                nextScreenRoute = next_screen_route,
                 components = ui_components.map { it.toUiComponent() })
         }
 

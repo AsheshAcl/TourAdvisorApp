@@ -1,45 +1,47 @@
 package com.tour.advisor.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.tour.advisor.presentation.ui.screens.HomeScreen
+import com.tour.advisor.presentation.ui.common.CommonScreen
 import com.tour.advisor.presentation.ui.screens.HomeViewModel
-import com.tour.advisor.presentation.ui.screens.OnBoardingScreen
-import com.tour.advisor.presentation.ui.screens.PlaceDetailsScreen
-import com.tour.advisor.presentation.ui.screens.SplashScreen
 
 @Composable
 fun AppNavigation(
     navController: NavHostController, homeViewModel: HomeViewModel
 ) {
-    NavHost(navController = navController, startDestination = Route.SPLASH_SCREEN.route) {
-        composable(Route.SPLASH_SCREEN.route) {
-            SplashScreen(modifier = Modifier, homeViewModel)
-        }
-        composable(Route.ONBOARDING_SCREEN.route) {
-            OnBoardingScreen(
-                modifier = Modifier, homeViewModel = homeViewModel
-            )
-        }
-        composable(Route.HOME_SCREEN.route) {
-            HomeScreen(
-                modifier = Modifier, homeViewModel = homeViewModel
-            )
-        }
-        composable(Route.DETAILS_SCREEN.route,
-            arguments = listOf(navArgument(NavArgument.PLACE_NAME) {
-                type = NavType.StringType
-            })) { backStackEntry ->
-            val placeName = backStackEntry.arguments?.getString(NavArgument.PLACE_NAME) ?: ""
-            PlaceDetailsScreen(
-                homeViewModel = homeViewModel, modifier = Modifier, navController = navController,
-                placeName = placeName
-            )
+    val screenConfig = homeViewModel.screenStateModels.collectAsState()
+    val firstScreen = if (screenConfig.value.isNotEmpty()) screenConfig.value[0] else null
+    firstScreen?.route?.let { route ->
+        NavHost(navController = navController, startDestination = route) {
+            screenConfig.value.forEach { config ->
+                config.route?.let {
+                    if (!config.arguments.isNullOrEmpty()) {
+                        composable(config.route, arguments = config.arguments.map { argument ->
+                            navArgument(argument) { type = NavType.StringType }
+                        }) { _ ->
+                            CommonScreen(
+                                modifier = Modifier,
+                                screenState = config,
+                                homeViewModel = homeViewModel
+                            )
+                        }
+                    } else {
+                        composable(it) {
+                            CommonScreen(
+                                modifier = Modifier,
+                                screenState = config,
+                                homeViewModel = homeViewModel
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -21,6 +21,8 @@ object ScreenMapper {
             screen_name = entity.screen_name,
             screen_title = entity.screenTitle,
             route = entity.route,
+            arguments = entity.arguments,
+            next_screen_route = entity.nextScreenRoute,
             ui_components = decodedComponents,
             auto_navigate_after = entity.autoNavigateAfter
         )
@@ -36,6 +38,8 @@ object ScreenMapper {
             screen_name = config.screen_name,
             screenTitle = config.screen_title,
             route = config.route,
+            arguments = config.arguments,
+            nextScreenRoute = config.next_screen_route,
             uiComponentsJson = encodedComponents,
             autoNavigateAfter = config.auto_navigate_after
         )

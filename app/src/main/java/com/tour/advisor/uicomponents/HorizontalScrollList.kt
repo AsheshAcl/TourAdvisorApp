@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.domain.models.ComponentStateModel
@@ -24,6 +25,11 @@ fun HorizontalScrollList(
     componentModel: ComponentStateModel, actionHandler: ComponentActionHandler? = null,
     homeViewModel: HomeViewModel? = null
 ) {
+    LaunchedEffect(Unit) {
+        componentModel.dataSource?.let {
+            actionHandler?.onAction(ComponentAction.FetchData(dataSource = it))
+        }
+    }
     val component = componentModel as? ComponentStateModel.HorizontalList ?: return
     Column(modifier = Modifier.fillMaxWidth()) {
         TextComponent(

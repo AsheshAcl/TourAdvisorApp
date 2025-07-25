@@ -9,7 +9,9 @@ data class ScreenEntity(
     val screen_name: String,
     val screenTitle: String?,
     val route: String,
+    val nextScreenRoute: String,
     val uiComponentsJson: String,
+    val arguments: List<String>? = null,
     val autoNavigateAfter: Long? = null
 )
 

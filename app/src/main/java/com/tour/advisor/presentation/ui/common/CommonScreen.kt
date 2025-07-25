@@ -1,5 +1,6 @@
 package com.tour.advisor.presentation.ui.common
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,21 +10,45 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.tour.advisor.ComponentRegistry
 import com.tour.advisor.domain.models.ComponentStateModel
+import com.tour.advisor.domain.models.ScreenModels
 import com.tour.advisor.presentation.ui.constants.ComponentConstant
 import com.tour.advisor.presentation.ui.screens.HomeViewModel
 import com.tour.advisor.uicomponents.LoadingComponent
+import kotlinx.coroutines.delay
 
 @Composable
 fun CommonScreen(modifier: Modifier = Modifier,
-                 components: List<ComponentStateModel>,
+                 screenState: ScreenModels,
                  homeViewModel: HomeViewModel) {
+    val context = LocalContext.current
+    val components: List<ComponentStateModel> = screenState.components
+    LaunchedEffect(Unit) {
+        if(screenState.autoNavigateAfter != null) {
+            homeViewModel.showHideLoading(isShow = true)
+            delay(screenState.autoNavigateAfter)
+            homeViewModel.showHideLoading(isShow = false)
+            screenState.nextScreenRoute?.let {
+                homeViewModel.navigateToRoute(
+                    it,
+                    true,
+                    screenState.route
+                )
+            }
+        }
+
+        homeViewModel.toastEvent.collect { message ->
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        }
+    }
     Box(modifier = Modifier.fillMaxSize()) {
         Column {
             val fixedComponents = components.filter { it.type == ComponentConstant.TOP_BAR_COMPONENT_NAME ||

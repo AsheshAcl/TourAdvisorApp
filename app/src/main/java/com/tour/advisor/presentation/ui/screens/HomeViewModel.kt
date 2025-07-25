@@ -13,12 +13,15 @@ import com.tour.advisor.domain.usecases.ScreenConfigUseCase
 import com.tour.advisor.logger.LoggerService
 import com.tour.advisor.presentation.dynamicUI.action.ComponentAction
 import com.tour.advisor.presentation.dynamicUI.action.ComponentActionHandler
+import com.tour.advisor.presentation.ui.constants.CommonConstants
 import com.tour.advisor.presentation.ui.constants.Screen
 import com.tour.advisor.presentation.ui.state.UIState
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -43,7 +46,9 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
     val uiState: StateFlow<UIState> = _uiState.asStateFlow()
 
     private val _screenStateModels = MutableStateFlow<List<ScreenModels>>(emptyList())
-    private val screenStateModels: StateFlow<List<ScreenModels>> = _screenStateModels
+    val screenStateModels: StateFlow<List<ScreenModels>> = _screenStateModels
+    private val _toastEvent = MutableSharedFlow<String>()
+    val toastEvent = _toastEvent.asSharedFlow()
 
     /*private val _placesStateModels = MutableStateFlow<List<InfoItemModel>>(emptyList())
     val placesStateModels: StateFlow<List<InfoItemModel>> = _placesStateModels*/
@@ -101,14 +106,14 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
             .filterNot { it.name == name } + screenModel
     }
 
-    fun getPlaces(screen: Screen) {
+    private fun getPlaces(screen: Screen) {
         logger.logInfo(TAG, "Calling api - getPlaces")
         showHideLoading(isShow = true)
         viewModelScope.launch {
             when (val result = placeUseCase.getPlaces()) {
                 is Response.Success -> {
 //                    _placesStateModels.emit(result.data)
-                    updateComponentList(screen, "nearby_places", result.data)
+                    updateComponentList(screen, CommonConstants.NEAR_BY_PLACE_DATA, result.data)
                     delay(2000)
                     showHideLoading(isShow = false)
                     showErrorMessage(isShow = false)
@@ -229,7 +234,9 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
     override fun onAction(componentAction: ComponentAction) {
         when (componentAction) {
             is ComponentAction.FetchData -> {
-
+                if(componentAction.dataSource == CommonConstants.NEAR_BY_PLACE_DATA) {
+                    getPlaces(screen = Screen.HOME_SCREEN)
+                }
             }
             is ComponentAction.NavigateToRoute -> {
                 navigateToRoute(
@@ -245,10 +252,16 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
             is ComponentAction.ButtonAction -> {
                 when(componentAction.action) {
                     "save_place" -> {
-
+                        showToastMessage("Place saved")
                     }
                 }
             }
+        }
+    }
+
+    private fun showToastMessage(message: String) {
+        viewModelScope.launch {
+            _toastEvent.emit(message)
         }
     }
 }

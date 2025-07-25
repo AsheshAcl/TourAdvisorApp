@@ -5,6 +5,9 @@ import com.tour.advisor.presentation.ui.constants.Screen
 data class ScreenModels(
     val name: Screen?,
     val title: String?,
+    val route: String?,
+    val nextScreenRoute: String?,
+    val arguments: List<String>?,
     val components: List<ComponentStateModel>,
     val autoNavigateAfter: Long? = null
 )

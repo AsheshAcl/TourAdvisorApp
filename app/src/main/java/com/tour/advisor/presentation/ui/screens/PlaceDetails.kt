@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.tour.advisor.logger.LoggerService
 import com.tour.advisor.presentation.ui.constants.Screen
-import com.tour.advisor.presentation.ui.common.CommonScreen
 import org.koin.compose.koinInject
 
 @Composable
@@ -23,9 +22,9 @@ fun PlaceDetailsScreen(modifier: Modifier, homeViewModel: HomeViewModel, navCont
 
     Column {
         placeDetailsScreenModel.value?.components?.let {
-            CommonScreen(
+            /*CommonScreen(
                 components = it, homeViewModel = homeViewModel
-            )
+            )*/
         }
     }
 }

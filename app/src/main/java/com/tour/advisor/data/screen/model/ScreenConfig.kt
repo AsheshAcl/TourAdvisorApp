@@ -8,8 +8,10 @@ data class ScreenConfig(
     val screen_name: String,
     val screen_title: String? = null,
     val route: String,
+    val arguments: List<String>? = null,
+    val next_screen_route: String,
     val ui_components: List<UIComponent>,
-    val auto_navigate_after: Long? = 0
+    val auto_navigate_after: Long? = null
 )
 
 @Serializable
