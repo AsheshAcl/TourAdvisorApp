@@ -1,5 +1,6 @@
 package com.tour.advisor
 
+import com.tour.advisor.base.TestCase
 import org.junit.Test
 
 import org.junit.Assert.*

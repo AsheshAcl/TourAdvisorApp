@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.serialization") version "1.9.22"
     id("com.google.devtools.ksp") version "2.0.0-1.0.21"
 //    id("dagger.hilt.android.plugin")
+    id("de.mannodermaus.android-junit5")
 }
 android {
     namespace = "com.tour.advisor"
@@ -19,6 +20,12 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    /*testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }*/
 
     buildTypes {
         release {
@@ -88,4 +95,5 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 }

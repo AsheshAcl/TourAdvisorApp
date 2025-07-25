@@ -40,7 +40,7 @@ class PlacesRepositoryImpl(private val remoteSource: DataRemoteDataSource,
                 Response.Success(localModels)
             } catch (dbException: Exception) {
                 logger.logError("PlacesRepositoryImpl", "DB fallback failed: ${dbException.message}")
-                Response.Error("DB fallback failed:", dbException)
+                Response.Error("DB fallback", dbException)
             }
         }
     }

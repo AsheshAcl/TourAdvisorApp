@@ -81,7 +81,7 @@ class HomeViewModel(private val getScreenConfigUseCase: ScreenConfigUseCase,
         }
     }
 
-    fun navigateBack() {
+    private fun navigateBack() {
         navController.popBackStack()
     }
 

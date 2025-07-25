@@ -8,15 +8,15 @@ data class PlaceModel(
     @SerialName("place_name")
     val placeName: String,
     @SerialName("place_image")
-    val placeImage: String?,
+    val placeImage: String? = null,
     @SerialName("place_description")
-    val placeDescription: String?,
+    val placeDescription: String? = null,
     @SerialName("place_cost")
-    val placeCost: String?,
+    val placeCost: String? = null,
     @SerialName("place_location")
-    val placeLocation: String?,
+    val placeLocation: String? = null,
     @SerialName("place_rating")
-    val placeRating: Double?,
+    val placeRating: Double? = null,
     @SerialName("additional_images")
     val additionalImages: List<String>? = null
 )
